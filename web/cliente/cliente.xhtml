@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Vista Cliente</title>
+        
+        <style>
+            /* CSS para centrar el contenido */
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .content-container {
+                text-align: center;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .btn {
+                margin-top: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            .img-fluid {
+                max-width: 300px;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!-- Contenedor centrado -->
+            <div class="content-container">
+                <h:graphicImage name="images/PPT.jpg" alt="Logo" class="img-fluid" />
+                <br></br>
+                <h1>Buenas, ¿deseas crear una partida nueva?</h1>
+                <h:commandButton value="Crear Partida" action="#{NavBean.gotoCrear_Juego}" class="btn" />
+                <br/><br/>
+                <h2>O jugar una que ya está en juego?</h2>
+                <h:commandButton value="Jugar partida" action="#{NavBean.gotoList_Juego}" class="btn" />
+                <br/><br/>
+                <h2>O participar en un torneo?</h2>
+                <h:commandButton value="Jugar Torneo" action="#{Navbean.gotoJugar_Torneo}" class="btn" />
+                <br></br>
+                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
+                <br/><br/>
+            </div>
+        </h:form>
+    </h:body>
+</html>

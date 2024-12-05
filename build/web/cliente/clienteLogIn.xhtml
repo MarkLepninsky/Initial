@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+                <title>Pantalla de Login de Cliente</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    </h:head>
+     <h:body class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class = "text-center">
+            <h2>
+        LogIn Cliente
+            </h2>
+        <h:form>
+             <h:panelGrid columns="2" class="border p-4 bg-light rounded">
+                    <h:outputLabel for="username" value="Nombre de usuario:" />
+                    <h:inputText id="username" value="#{loginBeanCliente.username}" required="true" />
+
+                    <h:outputLabel for="password" value="Contraseña:" />
+                    <h:inputSecret id="password" value="#{loginBeanCliente.password}" required="true" />
+
+                    <h:outputLabel />
+                </h:panelGrid>
+       
+        <h:commandButton value="Login" action = "#{loginBeanCliente.loginCheck}" class="btn btn-primary" style="margin-top: 10px;"/>
+        </h:form>
+        </div>
+     </h:body>
+</html>
+

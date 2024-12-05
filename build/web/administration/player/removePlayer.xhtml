@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Player Management</title>
+    </h:head>
+    <h:body>
+        <h:outputText value="Number of Players: #{player.numPlayers}" />
+        <h:form>
+            <h:outputLabel value="Select a Player: " />
+            <h:selectOneMenu value="#{player.tempName}">
+                <f:selectItem itemValue="" itemLabel="Elige Jugador que quires eliminar"/>
+                <f:selectItems value="#{player.players}" var="p"
+                               itemValue="#{p.name}" 
+                               itemLabel="#{p.name}" />
+            </h:selectOneMenu>
+            <h:commandButton value="Delete Selected Player" action="#{player.deleteSelectedPlayer}" />
+            <br/>
+             <h:commandButton
+                   value="Volver a lista de Administracion"
+                   action="#{NavBean.goToAdmin}"
+                />
+                             <h:commandButton
+                   value="Logout"
+                   action="#{NavBean.goToLogout}"
+                />
+           <br/>
+        </h:form>
+        
+    </h:body>
+</html>
