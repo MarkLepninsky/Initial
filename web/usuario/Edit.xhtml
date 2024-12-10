@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.EditUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idUsuario}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_NVictorias}" for="NVictorias" />
+                    <h:inputText id="NVictorias" value="#{usuarioController.selected.NVictorias}" title="#{bundle.EditUsuarioTitle_NVictorias}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_NDerrotas}" for="NDerrotas" />
+                    <h:inputText id="NDerrotas" value="#{usuarioController.selected.NDerrotas}" title="#{bundle.EditUsuarioTitle_NDerrotas}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_NEmpates}" for="NEmpates" />
+                    <h:inputText id="NEmpates" value="#{usuarioController.selected.NEmpates}" title="#{bundle.EditUsuarioTitle_NEmpates}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.EditUsuarioTitle_email}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_admin}" for="admin" />
+                    <h:selectOneMenu id="admin" value="#{usuarioController.selected.admin}" title="#{bundle.EditUsuarioTitle_admin}" >
+                        <f:selectItems value="#{adminController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_partida}" for="partida" />
+                    <h:selectOneMenu id="partida" value="#{usuarioController.selected.partida}" title="#{bundle.EditUsuarioTitle_partida}" >
+                        <f:selectItems value="#{partidaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_partida1}" for="partida1" />
+                    <h:selectOneMenu id="partida1" value="#{usuarioController.selected.partida1}" title="#{bundle.EditUsuarioTitle_partida1}" >
+                        <f:selectItems value="#{partidaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_player}" for="player" />
+                    <h:selectOneMenu id="player" value="#{usuarioController.selected.player}" title="#{bundle.EditUsuarioTitle_player}" >
+                        <f:selectItems value="#{playerController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUsuarioViewLink}"/>
+                <br />
+                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditUsuarioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMovimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_idMovimiento}" for="idMovimiento" />
+                    <h:inputText id="idMovimiento" value="#{movimientoController.selected.idMovimiento}" title="#{bundle.EditMovimientoTitle_idMovimiento}" required="true" requiredMessage="#{bundle.EditMovimientoRequiredMessage_idMovimiento}"/>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_nombreMovimiento}" for="nombreMovimiento" />
+                    <h:inputText id="nombreMovimiento" value="#{movimientoController.selected.nombreMovimiento}" title="#{bundle.EditMovimientoTitle_nombreMovimiento}" required="true" requiredMessage="#{bundle.EditMovimientoRequiredMessage_nombreMovimiento}"/>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{movimientoController.selected.descripcion}" title="#{bundle.EditMovimientoTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_reglas}" for="reglas" />
+                    <h:selectOneMenu id="reglas" value="#{movimientoController.selected.reglas}" title="#{bundle.EditMovimientoTitle_reglas}" >
+                        <f:selectItems value="#{reglasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_reglas1}" for="reglas1" />
+                    <h:selectOneMenu id="reglas1" value="#{movimientoController.selected.reglas1}" title="#{bundle.EditMovimientoTitle_reglas1}" >
+                        <f:selectItems value="#{reglasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{movimientoController.update}" value="#{bundle.EditMovimientoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMovimientoViewLink}"/>
+                <br />
+                <h:commandLink action="#{movimientoController.prepareList}" value="#{bundle.EditMovimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMovimientoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

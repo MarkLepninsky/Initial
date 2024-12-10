@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListReglasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListReglasEmpty}" rendered="#{reglasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{reglasController.items.rowCount > 0}">
+                    <h:outputText value="#{reglasController.pagination.pageFirstItem + 1}..#{reglasController.pagination.pageLastItem + 1}/#{reglasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{reglasController.previous}" value="#{bundle.Previous} #{reglasController.pagination.pageSize}" rendered="#{reglasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{reglasController.next}" value="#{bundle.Next} #{reglasController.pagination.pageSize}" rendered="#{reglasController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{reglasController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_idReglas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idReglas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_idMov1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMov1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_idMov2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMov2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_resultado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resultado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_movimientoidMovimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.movimientoidMovimiento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReglasTitle_movimientoidMovimiento1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.movimientoidMovimiento1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{reglasController.prepareView}" value="#{bundle.ListReglasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{reglasController.prepareEdit}" value="#{bundle.ListReglasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{reglasController.destroy}" value="#{bundle.ListReglasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{reglasController.prepareCreate}" value="#{bundle.ListReglasCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListReglasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPartidaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_idPartida}" for="idPartida" />
+                    <h:inputText id="idPartida" value="#{partidaController.selected.idPartida}" title="#{bundle.EditPartidaTitle_idPartida}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_idPartida}"/>
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_idU1}" for="idU1" />
+                    <h:inputText id="idU1" value="#{partidaController.selected.idU1}" title="#{bundle.EditPartidaTitle_idU1}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_idU1}"/>
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_idU2}" for="idU2" />
+                    <h:inputText id="idU2" value="#{partidaController.selected.idU2}" title="#{bundle.EditPartidaTitle_idU2}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_idU2}"/>
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_ganadoU1}" for="ganadoU1" />
+                    <h:inputText id="ganadoU1" value="#{partidaController.selected.ganadoU1}" title="#{bundle.EditPartidaTitle_ganadoU1}" />
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_ganadoU2}" for="ganadoU2" />
+                    <h:inputText id="ganadoU2" value="#{partidaController.selected.ganadoU2}" title="#{bundle.EditPartidaTitle_ganadoU2}" />
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_NRondas}" for="NRondas" />
+                    <h:inputText id="NRondas" value="#{partidaController.selected.NRondas}" title="#{bundle.EditPartidaTitle_NRondas}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_NRondas}"/>
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_NRondasHechas}" for="NRondasHechas" />
+                    <h:inputText id="NRondasHechas" value="#{partidaController.selected.NRondasHechas}" title="#{bundle.EditPartidaTitle_NRondasHechas}" />
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_NRondasGU1}" for="NRondasGU1" />
+                    <h:inputText id="NRondasGU1" value="#{partidaController.selected.NRondasGU1}" title="#{bundle.EditPartidaTitle_NRondasGU1}" />
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_NRondasGU2}" for="NRondasGU2" />
+                    <h:inputText id="NRondasGU2" value="#{partidaController.selected.NRondasGU2}" title="#{bundle.EditPartidaTitle_NRondasGU2}" />
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_usuarioidUsuario1}" for="usuarioidUsuario1" />
+                    <h:selectOneMenu id="usuarioidUsuario1" value="#{partidaController.selected.usuarioidUsuario1}" title="#{bundle.EditPartidaTitle_usuarioidUsuario1}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_usuarioidUsuario1}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPartidaLabel_usuarioidUsuario2}" for="usuarioidUsuario2" />
+                    <h:selectOneMenu id="usuarioidUsuario2" value="#{partidaController.selected.usuarioidUsuario2}" title="#{bundle.EditPartidaTitle_usuarioidUsuario2}" required="true" requiredMessage="#{bundle.EditPartidaRequiredMessage_usuarioidUsuario2}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{partidaController.update}" value="#{bundle.EditPartidaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPartidaViewLink}"/>
+                <br />
+                <h:commandLink action="#{partidaController.prepareList}" value="#{bundle.EditPartidaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPartidaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
