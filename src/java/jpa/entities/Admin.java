@@ -33,7 +33,7 @@ public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     @Column(name = "Usuario_idUsuario")
     private Integer usuarioidUsuario;
     @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)

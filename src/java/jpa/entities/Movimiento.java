@@ -41,11 +41,11 @@ public class Movimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     @Column(name = "idMovimiento")
     private Integer idMovimiento;
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     //@Size(min = 1, max = 45)
     @Column(name = "Nombre_Movimiento")
     private String nombreMovimiento;

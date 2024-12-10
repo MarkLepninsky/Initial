@@ -22,7 +22,9 @@ public class NavBean {
   public NavBean()
     {
     }
+  //------------------------Administrador-----------------------//
     
+
     public String goToAddPlayer()
     {
         return "/faces/administration/player/addPlayer.xhtml?faces-redirect=true";
@@ -73,6 +75,8 @@ public class NavBean {
         return "/faces/administration/move/listGameMoves.xhtml?faces-redirect=true";
     }
     
+    //-----------Cliente-------------//
+    
     public String goToLogout()
     {
         return "/faces/cliente/login.xhtml?faces-redirect=true";
@@ -92,6 +96,7 @@ public class NavBean {
     public String gotoList_Juego() {
         return "/faces/cliente/list_juego.xhtml?faces-redirect=true";
     }
+    
 
     public String gotoLogin() {
         return "/faces/cliente/login.xhtml?faces-redirect=true";
