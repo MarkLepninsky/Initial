@@ -19,5 +19,18 @@ public class TournamentBean implements Serializable {
     public ArrayList<Player> getPlayers() {
         return players;
     }
-
+    
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+    /*
+    public void removePlayer(Player player) {
+        for(int i = 0; i < players.size()-1 ; i ++){
+            if(players.get(i).getId().equals(player.getId()))
+            players.remove(i);
+        }
+    } 
+    public void startTournament(){
+        gameBean.CrearPartida(player, mp1);
+    }*/
 }
