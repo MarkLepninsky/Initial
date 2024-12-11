@@ -86,7 +86,7 @@ public class GameBean implements Serializable {
         }
         
         public ArrayList<Game> partidas(){
-        return games;
+            return games;
         }
     }
     
