@@ -25,6 +25,7 @@ public class GameBean implements Serializable {
         private ArrayList<RuleBean.Rule> rules; 
         private PlayerBean.Player player1,player2;
         private MoveBean.Move mp1,mp2;
+        ArrayList<RuleBean.Rule> rules; 
 
         public Game (){
             rules =  ruleBean.getRules();

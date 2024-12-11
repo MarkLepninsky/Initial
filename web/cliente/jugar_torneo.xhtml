@@ -60,36 +60,44 @@
                 border-radius: 5px;
                 border: 1px solid #ccc;
             }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+
+            th, td {
+                padding: 8px 12px;
+                text-align: center;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
         </style>
     </h:head>
     <h:body>
         <div class="content-container">
-            <!-- Información del torneo -->
-            <h1>Nombre del Torneo</h1>
-            <h2>Tu nombre vs NombreOponente</h2>
-
-            <!-- Primer formulario: Selección de movimiento -->
-            <h:form class="form-container">
-                <p>Selecciona un movimiento de la lista:</p>
-                <h:selectOneMenu value="" onchange="submit()" class="select-menu">
-                    <f:selectItem itemLabel="Selecciona Movimiento" itemValue="" noSelectionOption="true"/>
-                    <f:selectItem itemValue="0" itemLabel="Piedra" />
-                    <f:selectItem itemValue="1" itemLabel="Papel" />
-                    <f:selectItem itemValue="2" itemLabel="Tijera"/>
-                </h:selectOneMenu>
-            </h:form>
-
-            <!-- Segundo formulario: Confirmar y Volver -->
-            <h:form class="form-container">
-                <h:commandButton value="Confirmar" action="#{NavBean.gotoJugar_Partida}" class="btn" />
-            </h:form>
-
-            <h:form class="form-container">
+         <h1>Estado del Torneo</h1>
+            <h:form>
+                <h:dataTable value="#{tournament.getPlayers()}" var="player">
+                    <h:column>
+                        <f:facet name="header">Jugador</f:facet>
+                        #{player.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Movimiento</f:facet>
+                        #{tournament.playerMoves[player]}
+                    </h:column>
+                </h:dataTable>
+                
+                <h:commandButton value="Iniciar Torneo" action="#{tournament.startTournament(currentUser.id)}" class="btn" />
                 <h:commandButton value="Volver" action="#{NavBean.gotoCliente}" class="btn" />
             </h:form>
-
-            <!-- Texto de estado de la partida -->
-            <p>Texto de estado de la partida</p>
-        </div>
+         </div>
     </h:body>
 </html>
