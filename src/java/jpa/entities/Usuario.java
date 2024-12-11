@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author fjdomher
+ * @author IVSTOYKO
  */
 @Entity
 @Table(name = "usuario")
@@ -40,16 +40,16 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     @Column(name = "idUsuario")
     private Integer idUsuario;
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     //@Size(min = 1, max = 45)
     @Column(name = "Nombre")
     private String nombre;
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     //@Size(min = 1, max = 45)
     @Column(name = "Password")
     private String password;
@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
     private Integer nEmpates;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    //@NotNull
+    ////@NotNull
     //@Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;

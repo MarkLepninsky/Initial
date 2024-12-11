@@ -12,12 +12,12 @@ import jpa.entities.Reglas;
 
 /**
  *
- * @author fjdomher
+ * @author IVSTOYKO
  */
 @Stateless
 public class ReglasFacade extends AbstractFacade<Reglas> {
 
-    @PersistenceContext(unitName = "PracticaISOPU")
+    @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
 
     @Override

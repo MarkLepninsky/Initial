@@ -12,12 +12,12 @@ import jpa.entities.Admin;
 
 /**
  *
- * @author fjdomher
+ * @author IVSTOYKO
  */
 @Stateless
 public class AdminFacade extends AbstractFacade<Admin> {
 
-    @PersistenceContext(unitName = "PracticaISOPU")
+    @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
 
     @Override

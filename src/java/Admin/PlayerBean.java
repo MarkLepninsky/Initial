@@ -5,15 +5,18 @@ package Admin;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import jpa.session.*;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.ejb.EJB;
 
 @Named(value = "player")
 @SessionScoped
 public class PlayerBean implements Serializable {
+    @EJB
+    private UsuarioFacade u;
 
     public PlayerBean() {
         players.add(new Player("Alice", "alice@example.com", "password123"));
@@ -130,9 +133,8 @@ public class PlayerBean implements Serializable {
     }
     
     public void createPlayer() {
-        Player newp = new Player (tempName, tempEmail, tempPass);
-        players.add(newp);
-        numPlayers++;
+        int a = u.getMaxId();
+        u.createAccount(tempName,tempPass,a+1);
     }
 
 }

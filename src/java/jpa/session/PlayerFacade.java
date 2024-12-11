@@ -12,12 +12,12 @@ import jpa.entities.Player;
 
 /**
  *
- * @author fjdomher
+ * @author IVSTOYKO
  */
 @Stateless
 public class PlayerFacade extends AbstractFacade<Player> {
 
-    @PersistenceContext(unitName = "PracticaISOPU")
+    @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
 
     @Override
