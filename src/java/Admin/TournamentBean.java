@@ -21,11 +21,32 @@ public class TournamentBean implements Serializable {
     private RuleBean ruleBean = new RuleBean(); 
     private MoveBean moveBean = new MoveBean();
 
-    public TournamentBean() {}
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public TournamentBean() {}
+    
+    public void setGameBean(GameBean gameBean) {
+        this.gameBean = gameBean;
     }
+
+    public void setRuleBean(RuleBean ruleBean) {
+        this.ruleBean = ruleBean;
+    }
+
+    public void setMoveBean(MoveBean moveBean) {
+        this.moveBean = moveBean;
+    }
+
+    
+    public void addPlayer(Player player, String move) {
+        players.add(player);
+        playerMoves.put(player, move);
+    }
+    
+    public void removePlayer(Player player) {
+        players.remove(player);
+        playerMoves.remove(player);
+    }
+    
 
     public Map<Player, Move> getPlayerMoves() {
         return playerMoves;
@@ -44,7 +65,6 @@ public class TournamentBean implements Serializable {
         }
     }
  
-    // Start the tournament
      public Player startTournament(int userId) {
         if (players.size() < 2) {
             return null; 
@@ -96,4 +116,13 @@ public class TournamentBean implements Serializable {
         }
         return null; //
     }
+
+    /*
+    private boolean isAdmin(int userId) {
+
+        AdminFacade adminFacade = new AdminFacade();
+        return adminFacade.isAdmin(userId);
+    }
+    */
 }
+
