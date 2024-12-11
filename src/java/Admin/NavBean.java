@@ -30,6 +30,11 @@ public class NavBean {
         return "/faces/administration/player/addPlayer.xhtml?faces-redirect=true";
     }
     
+        public String goToCrearAdmin()
+    {
+        return "/faces/administration/crear_admin.xhtml?faces-redirect=true";
+    }
+    
     public String goToAdmin()
     {
         return "/faces/administration/admin.xhtml?faces-redirect=true";

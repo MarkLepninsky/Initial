@@ -15,6 +15,7 @@ import javax.ejb.EJB;
 @Named(value = "player")
 @SessionScoped
 public class PlayerBean implements Serializable {
+
     @EJB
     private UsuarioFacade u;
 
@@ -34,6 +35,7 @@ public class PlayerBean implements Serializable {
     private ArrayList<Player> players = new ArrayList<>();
 
     public class Player {
+
         private String name;
         private String email;
         private String pass;
@@ -58,8 +60,6 @@ public class PlayerBean implements Serializable {
         }
     }
 
-
-
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -71,7 +71,7 @@ public class PlayerBean implements Serializable {
     public void setTempName(String tempName) {
         this.tempName = tempName;
     }
-    
+
     public String getMname() {
         return mname;
     }
@@ -99,6 +99,7 @@ public class PlayerBean implements Serializable {
     public int getNumPlayers() {
         return numPlayers;
     }
+
     public void deleteSelectedPlayer() {
         Player playerToRemove = null;
         for (Player player : players) {
@@ -114,6 +115,7 @@ public class PlayerBean implements Serializable {
             System.out.println("Removed Player: " + playerToRemove.getName());
         }
     }
+
     public void modifySelectedPlayer() {
         Player playerToRemove = null;
         for (Player player : players) {
@@ -126,17 +128,48 @@ public class PlayerBean implements Serializable {
         if (playerToRemove != null) {
             players.remove(playerToRemove);
             System.out.println("Removed Player: " + playerToRemove.getName());
-            Player newp = new Player (mname, tempEmail, tempPass);
+            Player newp = new Player(mname, tempEmail, tempPass);
             players.add(newp);
             numPlayers = players.size();
         }
     }
-    
+
     public void createPlayer() {
         int a = u.getMaxId();
-        u.createAccount(tempName,tempPass,a+1);
+        u.createAccount(tempName, tempPass, a + 1);
+        addCliente(tempName);
+    }
+
+    public void addCliente() {
+        int a;
+        a = u.getId(tempName);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.addCliente(a);
+        }
+    }
+
+    public void addCliente(String nombre) {
+        int a;
+        a = u.getId(nombre);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.addCliente(a);
+        }
+    }
+
+    public void addAdmin() {
+        
+        System.out.println("Adding admir for : " + tempName);
+        int a;
+        a = u.getId(tempName);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.addAdmin(a);
+        }
     }
 
 }
- 
-    

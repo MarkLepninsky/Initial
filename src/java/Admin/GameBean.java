@@ -20,14 +20,6 @@ public class GameBean implements Serializable {
     private ArrayList<Game> games = new ArrayList<>();
     private RuleBean ruleBean;
 
-    public ArrayList<Game> getGames() {
-        return games;
-    }
-
-    public RuleBean getRuleBean() {
-        return ruleBean;
-    }
-
     public class Game{
 
         private ArrayList<RuleBean.Rule> rules; 
@@ -83,7 +75,7 @@ public class GameBean implements Serializable {
             return "Esperando jugador";
         }
         
-        public String agregarMovimientoP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
+        public String agregarMovimientP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
         game.player2 = player2;
         game.mp2 = mp2;
         PlayerBean.Player ganador = playGame(game);
@@ -100,24 +92,8 @@ public class GameBean implements Serializable {
     
   public GameBean() {
   }
-        public String CrearPartida(PlayerBean.Player jugador, MoveBean.Move mp1){
-            Game game = new Game(jugador,mp1);
-            games.add(game);
-            return "Esperando jugador";
-        }
-        public String agregarMovimientoP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
-        game.player2 = player2;
-        game.mp2 = mp2;
-        PlayerBean.Player ganador = playGame(game);
-        String msj = "Ha ganado: ";
-        msj += ganador.getName();
-        games.remove(game);
-        return msj;
-        }
-        
-        public ArrayList<Game> partidas(){
-        return games;
-        }
+
+
 
 
   public PlayerBean.Player playGame(Game game){

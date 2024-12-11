@@ -64,10 +64,7 @@ public class MoveBean implements Serializable{
     public ArrayList<Move> getPlayers() {
         return moves;
     }
-    public Move createMove(String name, String description){
-        Move move = new Move(name,description);
-        return move;
-    }
+    
      public String getTempName () 
     {
         return tempName;
