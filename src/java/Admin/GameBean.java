@@ -22,11 +22,9 @@ public class GameBean implements Serializable {
 
     public class Game{
 
-        ArrayList<RuleBean.Rule> rules; 
-        PlayerBean.Player player1;
-        PlayerBean.Player player2;
-        MoveBean.Move mp1;
-        MoveBean.Move mp2;
+        private ArrayList<RuleBean.Rule> rules; 
+        private PlayerBean.Player player1,player2;
+        private MoveBean.Move mp1,mp2;
 
         public Game (){
             rules =  ruleBean.getRules();
@@ -88,7 +86,7 @@ public class GameBean implements Serializable {
         }
         
         public ArrayList<Game> partidas(){
-            return games;
+        return games;
         }
     }
     
