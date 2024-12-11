@@ -83,7 +83,7 @@ public class GameBean implements Serializable {
             return "Esperando jugador";
         }
         
-        public String agregarMovimientP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
+        public String agregarMovimientoP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
         game.player2 = player2;
         game.mp2 = mp2;
         PlayerBean.Player ganador = playGame(game);
@@ -105,7 +105,7 @@ public class GameBean implements Serializable {
             games.add(game);
             return "Esperando jugador";
         }
-        public String agregarMovimientP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
+        public String agregarMovimientoP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
         game.player2 = player2;
         game.mp2 = mp2;
         PlayerBean.Player ganador = playGame(game);

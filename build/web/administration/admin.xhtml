@@ -1,76 +1,115 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    
+    <h:head>
+        <title>Ejemplo Navegación Explicita</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            h1 {
+                text-align: center;
+                margin-top: 30px;
+            }
+            .container {
+                width: 80%;
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            }
+            p {
+                font-size: 1.2em;
+                margin-top: 20px;
+            }
+            h:commandButton {
+                margin-top: 10px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            h:commandButton:hover {
+                background-color: #45a049;
+            }
+            .section {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        </style>
+    </h:head>
     <body>
         <h:form>
-           <h1>Admin Page</h1>
-               <h:commandButton
-                   value="Anadir Jugador"
-                   action="#{NavBean.goToAddPlayer}"
-                />
-               <h:commandButton
-                   value="Actualizar Jugador"
-                   action="#{NavBean.goToUpdatePlayer}"
-                />
-               
-               <h:commandButton
-                   value="Eliminar Jugador"
-                   action="#{NavBean.goToRemovePlayer}"
-                />
-               <br/>
-               <h:commandButton
-                   value="Anadir Jugada"
-                   action="#{NavBean.goToAddMove}"
-                />
-               
-               <h:commandButton
-                   value="Eliminar Jugada"
-                   action="#{NavBean.goToRemoveMove}"
-                />
-               <br/>
-               <h:commandButton
-                   value="Anadir Regla"
-                   action="#{NavBean.goToAddRule}"
-                />
-               
-               
-               <h:commandButton
-                   value="Eliminar Regla"
-                   action="#{NavBean.goToRemoveRule}"
-                />
-               <br/>
-               <h:commandButton
-                   value="Lista de Jugadas"
-                   action="#{NavBean.goToListGameMoves}"
-                />
-               <br/>
-               <h:commandButton
-                   value="Lista Jugadores"
-                   action="#{NavBean.goToListPlayers}"
-                />
-               <br/>
-               <h:commandButton
-                   value="Logout"
-                   action="#{NavBean.goToLogout}"
-                />
-               
-               
-           </h:form>
-        
-        
-        
-        
-        
+            <div class="container">
+                <h1>Admin Page</h1>
+
+                <div class="section">
+                    <p>Manejar jugador</p>
+                    <h:commandButton
+                        value="Añadir Jugador"
+                        action="#{NavBean.goToAddPlayer}"
+                    />
+                    <h:commandButton
+                        value="Actualizar Jugador"
+                        action="#{NavBean.goToUpdatePlayer}"
+                    />
+                    <h:commandButton
+                        value="Eliminar Jugador"
+                        action="#{NavBean.goToRemovePlayer}"
+                    />
+                </div>
+
+                <div class="section">
+                    <p>Manejar Jugada</p>
+                    <h:commandButton
+                        value="Añadir Jugada"
+                        action="#{NavBean.goToAddMove}"
+                    />
+                    <h:commandButton
+                        value="Eliminar Jugada"
+                        action="#{NavBean.goToRemoveMove}"
+                    />
+                </div>
+
+                <div class="section">
+                    <p>Manejar Regla</p>
+                    <h:commandButton
+                        value="Añadir Regla"
+                        action="#{NavBean.goToAddRule}"
+                    />
+                    <h:commandButton
+                        value="Eliminar Regla"
+                        action="#{NavBean.goToRemoveRule}"/>
+                </div>
+
+                <div class="section">
+                    <p>Ver listas</p>
+                    <h:commandButton
+                        value="Lista de Jugadas"
+                        action="#{NavBean.goToListGameMoves}"
+                    />
+                    <h:commandButton
+                        value="Lista Jugadores"
+                        action="#{NavBean.goToListPlayers}"
+                    />
+                </div>
+
+                <div class="section">
+                    <p>Logout</p>
+                    <h:commandButton
+                        value="Logout"
+                        action="#{NavBean.goToLogout}"
+                    />
+                </div>
+            </div>
+        </h:form>
     </body>
 </html>
