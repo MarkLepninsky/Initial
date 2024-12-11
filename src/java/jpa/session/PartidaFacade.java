@@ -12,12 +12,12 @@ import jpa.entities.Partida;
 
 /**
  *
- * @author IVSTOYKO
+ * @author fjdomher
  */
 @Stateless
 public class PartidaFacade extends AbstractFacade<Partida> {
 
-    @PersistenceContext(unitName = "PapelPiedraTijerasPU")
+    @PersistenceContext(unitName = "PracticaISOPU")
     private EntityManager em;
 
     @Override

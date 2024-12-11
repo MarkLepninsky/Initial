@@ -12,12 +12,12 @@ import jpa.entities.Movimiento;
 
 /**
  *
- * @author IVSTOYKO
+ * @author fjdomher
  */
 @Stateless
 public class MovimientoFacade extends AbstractFacade<Movimiento> {
 
-    @PersistenceContext(unitName = "PapelPiedraTijerasPU")
+    @PersistenceContext(unitName = "PracticaISOPU")
     private EntityManager em;
 
     @Override

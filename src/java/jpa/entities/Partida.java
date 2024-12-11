@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author IVSTOYKO
+ * @author fjdomher
  */
 @Entity
 @Table(name = "partida")
@@ -44,15 +44,15 @@ public class Partida implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    ////@NotNull
+    //@NotNull
     @Column(name = "idPartida")
     private Integer idPartida;
     @Basic(optional = false)
-    ////@NotNull
+    //@NotNull
     @Column(name = "ID_U1")
     private int idU1;
     @Basic(optional = false)
-    ////@NotNull
+    //@NotNull
     @Column(name = "ID_U2")
     private int idU2;
     @Column(name = "Ganado_U1")
@@ -60,7 +60,7 @@ public class Partida implements Serializable {
     @Column(name = "Ganado_U2")
     private Integer ganadoU2;
     @Basic(optional = false)
-    ////@NotNull
+    //@NotNull
     @Column(name = "N_Rondas")
     private int nRondas;
     @Column(name = "N_Rondas_Hechas")
