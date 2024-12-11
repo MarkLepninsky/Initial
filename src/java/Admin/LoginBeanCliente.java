@@ -5,9 +5,12 @@
  */
 package Admin;
 
+import jpa.session.*;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,15 +19,20 @@ import java.io.Serializable;
 @Named(value = "loginBeanCliente")
 @SessionScoped
 public class LoginBeanCliente implements Serializable {
+        @EJB
+        private UsuarioFacade u;
+        private static final Logger log = Logger.getLogger(LoginBeanCliente.class.getName());
+        
+        
         private String username;
         private String password;
 
     /**
      * Creates a new instance of LoginBeanCliente
      */
-    public LoginBeanCliente() {
-        username = "cliente";
-        password = "cliente";
+    public LoginBeanCliente(){
+        username = "client";
+        password = "client";
     }
     
     public void setUsername(String username){
@@ -44,9 +52,34 @@ public class LoginBeanCliente implements Serializable {
     
     public String loginCheck(){
     if(this.username.equals(username) && this.password.equals(password) && password != null && username != null){
-    return "/faces/cliente/cliente.xhtml?faces-redirect=true";
-    } else {
-    return "/faces/cliente/clienteLogIn.xhtml?faces-redirect=true";
+        log.info("Usuario y Contra verificados!!!!");
+        int a = u.getId(username);
+        boolean comp = u.ClientId(a);
+        if(comp == true){
+            return "/faces/cliente/cliente.xhtml?faces-redirect=true";
+        } else {
+            return "/faces/cliente/clienteLogIn.xhtml?faces-redirect=true";
+        }
+        } else {
+            return "/faces/cliente/clienteLogIn.xhtml?faces-redirect=true";
+        }
     }
+    
+    public boolean checkPassword(String password){
+        String truePassword = u.findPassword(password);
+        if(password.equals(truePassword)){
+        return true;
+        } else {
+        return false;
+        }
+    }
+    
+    public boolean checkUsername(String Nombre){
+        String trueUsername = u.findName(Nombre);
+        if(trueUsername == null){
+        return true;
+        } else {
+        return false;
+        }
     }
 }

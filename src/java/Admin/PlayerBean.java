@@ -28,7 +28,6 @@ public class PlayerBean implements Serializable {
 
     private String tempName;
     private String mname;
-    private String tempEmail;
     private String tempPass;
     private int numPlayers = 0;
 
@@ -88,50 +87,8 @@ public class PlayerBean implements Serializable {
         this.tempPass = tempPass;
     }
 
-    public String getTempEmail() {
-        return tempEmail;
-    }
-
-    public void setTempEmail(String tempEmail) {
-        this.tempEmail = tempEmail;
-    }
-
     public int getNumPlayers() {
         return numPlayers;
-    }
-
-    public void deleteSelectedPlayer() {
-        Player playerToRemove = null;
-        for (Player player : players) {
-            if (player.getName().equals(tempName)) {
-                playerToRemove = player;
-                break;
-            }
-        }
-
-        if (playerToRemove != null) {
-            players.remove(playerToRemove);
-            numPlayers = players.size();
-            System.out.println("Removed Player: " + playerToRemove.getName());
-        }
-    }
-
-    public void modifySelectedPlayer() {
-        Player playerToRemove = null;
-        for (Player player : players) {
-            if (player.getName().equals(tempName)) {
-                playerToRemove = player;
-                break;
-            }
-        }
-
-        if (playerToRemove != null) {
-            players.remove(playerToRemove);
-            System.out.println("Removed Player: " + playerToRemove.getName());
-            Player newp = new Player(mname, tempEmail, tempPass);
-            players.add(newp);
-            numPlayers = players.size();
-        }
     }
 
     public void createPlayer() {
@@ -146,7 +103,7 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
-            u.addCliente(a);
+            u.addClient(a);
         }
     }
 
@@ -156,13 +113,11 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
-            u.addCliente(a);
+            u.addClient(a);
         }
     }
 
     public void addAdmin() {
-        
-        System.out.println("Adding admir for : " + tempName);
         int a;
         a = u.getId(tempName);
         if (a == -1) {
@@ -172,4 +127,73 @@ public class PlayerBean implements Serializable {
         }
     }
 
+    public void removeAdmin() {
+        int a;
+        a = u.getId(tempName);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.removeAdmin(a);
+        }
+    }
+    
+    public void removeAdmin(String nombre) {
+        int a;
+        a = u.getId(nombre);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.removeAdmin(a);
+        }
+    }
+    
+    public void removeUser(){
+        removeClient(tempName);
+        removeAdmin(tempName);
+        int a;
+        a = u.getId(tempName);
+        if(a == -1){
+            System.out.println("Error");
+        } else {
+            u.removeAccount(a);
+        }
+    }
+    
+    public void removeClient(){
+        int a;
+        a = u.getId(tempName);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.removeClient(a);
+        }
+    }
+    
+    public void removeClient(String nombre){
+        int a;
+        a = u.getId(nombre);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.removeClient(a);
+        }
+    }
+    
+    public boolean checkPassword(String password){
+        String truePassword = u.findPassword(password);
+        if(password.equals(truePassword)){
+        return true;
+        } else {
+        return false;
+        }
+    }
+    
+    public boolean checkUsername(String Nombre){
+        String trueUsername = u.findName(Nombre);
+        if(trueUsername == null){
+        return true;
+        } else {
+        return false;
+        }
+    }
 }

@@ -24,6 +24,33 @@
                    value="Logout"
                    action="#{NavBean.goToLogout}"
                 />
+           <br>
+           </br>
+           <h:outputText value ="#{player.tempName}"></h:outputText>
+        </h:form>
+        <br>
+        </br>
+        <br>
+        </br>
+        <h:form>
+           Nombre de Jugador: 
+           <h:inputText value="#{player.tempName}"/>
+           <h:commandButton
+                   value="Eliminar Admin"
+                   action="#{player.removeAdmin()}"
+                />
+           <br/>
+           <h:commandButton
+                   value="AdminPage"
+                   action="#{NavBean.goToAdmin}"
+                />
+           <br/>
+           <h:commandButton
+                   value="Logout"
+                   action="#{NavBean.goToLogout}"
+                />
+           <br>
+           </br>
            <h:outputText value ="#{player.tempName}"></h:outputText>
         </h:form>
     </body>

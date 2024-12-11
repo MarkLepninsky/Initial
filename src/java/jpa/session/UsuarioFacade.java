@@ -37,7 +37,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public String findName(String nombre){
     List<String> list = em.createNativeQuery("SELECT Nombre FROM usuario WHERE Nombre = ?").setParameter(1,nombre).getResultList();
-    if(list.get(0) == null){
+    if(list.isEmpty()){
     return null;
     } else{
     return list.get(0);
@@ -45,8 +45,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public String findPassword(String contra){
-    List<String> list = em.createNativeQuery("SELECT Password FROM usuario WHERE Password = :contra").setParameter("contra",contra).getResultList();
-    if(list.get(0) == null){
+    List<String> list = em.createNativeQuery("SELECT Password FROM usuario WHERE Password = ?").setParameter(1,contra).getResultList();
+    if(list.isEmpty()){
     return null;
     } else{
     return list.get(0);
@@ -60,7 +60,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public int getId(String nombre){
     List<Integer> list = em.createNativeQuery("SELECT idUsuario FROM usuario WHERE Nombre = ?").setParameter(1, nombre).getResultList();
-    if(list.get(0) == null || list.isEmpty()){
+    if(list.isEmpty()){
     return -1;
     } else {
     return list.get(0);
@@ -71,15 +71,37 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     em.createNativeQuery("INSERT INTO admin (Usuario_idUsuario) VALUES (?)").setParameter(1,id).executeUpdate();
     }
     
-    public void addCliente(int id){
+    public void addClient(int id){
     em.createNativeQuery("INSERT INTO player (Usuario_idUsuario) VALUES (?)").setParameter(1,id).executeUpdate();
     }
     
-    public void removeCliente(int id){
-    em.createNativeQuery("DELETE FROM player where Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
+    public void removeClient(int id){
+    em.createNativeQuery("DELETE FROM player WHERE Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
     }
     
     public void removeAdmin(int id){
-    em.createNativeQuery("DELETE FROM admin where Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
+    em.createNativeQuery("DELETE FROM admin WHERE Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
+    }
+    
+    public void removeAccount(int id){
+    em.createNativeQuery("DELETE FROM usuario WHERE idUsuario = ?").setParameter(1,id).executeUpdate();
+    }
+    
+    public boolean ClientId(int id){
+        List<Integer> list = em.createNativeQuery("SELECT Usuario_idUsuario FROM player WHERE Usuario_idUsuario = ?").setParameter(1,id).getResultList();
+        if(list.isEmpty()){
+        return false;
+        } else {
+        return true;
+        }
+    }
+    
+    public boolean AdminId(int id){
+        List<Integer> list = em.createNativeQuery("SELECT Usuario_idUsuario FROM admin WHERE Usuario_idUsuario = ?").setParameter(1,id).getResultList();
+        if(list.isEmpty()){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
