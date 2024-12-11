@@ -65,6 +65,10 @@
                         value="Eliminar Jugador"
                         action="#{NavBean.goToRemovePlayer}"
                     />
+                    <h:commandButton
+                        value="Hacer Admin"
+                        action="#{NavBean.goToCrearAdmin}"
+                    />
                 </div>
 
                 <div class="section">
@@ -99,6 +103,14 @@
                     <h:commandButton
                         value="Lista Jugadores"
                         action="#{NavBean.goToListPlayers}"
+                    />
+                </div>
+                
+                <div class="section">
+                    <p>Jugar contra IA</p>
+                    <h:commandButton
+                        value="Jugar IA"
+                        action="#{NavBean.goToIA}"
                     />
                 </div>
 

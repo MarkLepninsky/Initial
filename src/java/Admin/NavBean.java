@@ -80,6 +80,11 @@ public class NavBean {
         return "/faces/administration/move/listGameMoves.xhtml?faces-redirect=true";
     }
     
+    public String goToIA()
+    {
+        return "faces/administration/ia.xhtml?faces-redirect=true";
+    }
+    
     //-----------Cliente-------------//
     
     public String goToLogout()

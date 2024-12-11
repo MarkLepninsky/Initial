@@ -17,9 +17,6 @@ and open the template in the editor.
            Nombre de Jugador: 
            <h:inputText value="#{player.tempName}"/>
            <br/>
-           Email de Jugador: 
-           <h:inputText value="#{player.tempEmail}"/>
-           <br/>
            Contraseña de Jugador: 
            <h:inputText value="#{player.tempPass}"/>
            <br/>
@@ -37,7 +34,7 @@ and open the template in the editor.
                    value="Logout"
                    action="#{NavBean.goToLogout}"
                 />
-           
+           <h:outputText value ="#{player.tempName}"></h:outputText>
         </h:form>
     </body>
 </html>

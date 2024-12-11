@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Piedra Papel Tijera</title>
+    </h:head>
+    <h:body>
+        <h1>Piedra, Papel o Tijera</h1>
+        
+        <h:form>
+            <h:outputLabel value="Elige tu jugada: " />
+            <h:selectOneMenu value="#{juegoIABean.jugadaJugador}">
+                <f:selectItem itemValue="Piedra" itemLabel="Piedra" />
+                <f:selectItem itemValue="Papel" itemLabel="Papel" />
+                <f:selectItem itemValue="Tijera" itemLabel="Tijera" />
+            </h:selectOneMenu>
+            
+            <h:commandButton value="Jugar" action="#{juegoIABean.jugar}" />
+        </h:form>
+        
+        <h:panelGroup rendered="#{not empty juegoIABean.resultado}">
+            <h2>Resultado</h2>
+            <p>Elección de la IA: #{juegoIABean.jugadaIA}</p>
+            <p>Resultado: #{juegoIABean.resultado}</p>
+        </h:panelGroup>
+    </h:body>
+</html>
