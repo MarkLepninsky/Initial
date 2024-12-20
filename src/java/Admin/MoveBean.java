@@ -8,8 +8,10 @@ package Admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
-
+import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
 
 /**
@@ -35,12 +37,11 @@ public class MoveBean implements Serializable{
     }
     
     
-    private String tempName="";
-    private String tempDescription="";
-    private int numMoves = 0;
-
-    private ArrayList<Move> moves = new ArrayList<>();
-
+    private String tempName;
+    private String tempDescription;
+    private int numMoves;
+    private List<String> moves;
+    private MovimientoFacade mf;
     public class Move {
         
         public String name;
@@ -59,10 +60,6 @@ public class MoveBean implements Serializable{
         public String getDescription() {
             return description;
         }
-    }
-    
-    public ArrayList<Move> getPlayers() {
-        return moves;
     }
     
      public String getTempName () 
@@ -84,35 +81,52 @@ public class MoveBean implements Serializable{
     {
         this.tempDescription= tempDescription;
     }
+    @PostConstruct
+    public void init(){
+    moves = new ArrayList<>();
+    listaMoves();
+    }
     
      public void deleteSelectedMove() {
-        Move moveToRemove = null;
-        for (Move move : moves) {
-            if (move.getName().equals(tempName)) {
-                moveToRemove = move;
-                break;
-            }
-        }
-
-        if (moveToRemove != null) {
-            moves.remove(moveToRemove);
-            numMoves = moves.size();
-            System.out.println("Removed Move: " + moveToRemove.getName());
-        }
+     int a = mf.findMovimiento(tempName);
+     if(a == -1){
+     System.out.println("Error");
+     } else {
+     mf.removeMovimiento(a);
+     numMoves--;
+     }
+    }
+     
+    public void deleteSelectedMove(String nombre) {
+     int a = mf.findMovimiento(nombre);
+     if(a == -1){
+     System.out.println("Error");
+     } else {
+     mf.removeMovimiento(a);
+     numMoves--;
+     init();
+     }
     }
      
      public void createMove() {
-        Move newm = new Move (tempName, tempDescription);
-        moves.add(newm);
-        numMoves++;
+         int a = mf.getMaxId();
+         mf.createMovimiento(a, tempName, tempDescription);
     }
     
      public int getNumMoves() {
         return numMoves;
     }
      
-    public ArrayList<Move> getMoves() {
+    public void listaMoves(){
+    List<String> list = mf.listMovimiento();
+    for(String string : list){
+    moves.add(string);
+    numMoves++;
+    }
+    }
+    
+     
+    public List<String> getMoves() {
         return moves;
     }
-     
 }

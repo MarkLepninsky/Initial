@@ -8,8 +8,10 @@ package Admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
-
+import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
 
 /**
@@ -28,12 +30,16 @@ public class RuleBean implements Serializable{
     
     
     
-    private String tempNameG="";
-    private String tempNameP="";
-    private int numRules = 0;
-
-    private ArrayList<Rule> rules = new ArrayList<>();
-
+    private String tempNameG;
+    private String tempNameP;
+    private int id;
+    private int numRules;
+    private String resultado;
+    private String descripcion;
+    private ReglasFacade rf;
+    private MovimientoFacade mf;
+    private List<Integer> reglas;
+    
     public class Rule {
         
         public String nameG;
@@ -51,6 +57,12 @@ public class RuleBean implements Serializable{
         public String getNameP() {
             return nameP;
         }
+    }
+    
+    @PostConstruct
+    public void init(){
+    reglas = new ArrayList<>();
+    listReglas();
     }
     
       public String getTempNameG() {
@@ -73,30 +85,48 @@ public class RuleBean implements Serializable{
         return numRules;
     }
     
-    public ArrayList<Rule> getRules() {
-        return rules;
-    }
     
     public void createRule() {
-        Rule newr = new Rule (tempNameG, tempNameP);
-        rules.add(newr);
-        numRules++;
-    }
-    
-    public void deleteSelectedRule() {
-        Rule ruleToRemove = null;
-        for (Rule rule : rules) {
-            if (rule.getNameG().equals(tempNameG)) {
-                ruleToRemove = rule;
-                break;
-            }
-        }
-
-        if (ruleToRemove != null) {
-            rules.remove(ruleToRemove);
-            numRules = rules.size();
-            System.out.println("Removed Move: " + ruleToRemove.getNameG());
+        int a = mf.findMovimiento(tempNameG);
+        int b = mf.findMovimiento(tempNameP);
+        if(a == -1 || b == -1){
+        System.out.println("Error");
+        } else {
+        int c = rf.getMaxId();
+        rf.createRegla(c, a, b, resultado, descripcion);
         }
     }
     
-}
+    public void deleteRule() {
+        int a = rf.getId(id);
+        if(a == id){
+        rf.removeRegla(id);
+        numRules--;
+        } else {
+        System.out.println("Error");
+        }
+        }
+    
+        public void deleteRule(int id) {
+        int a = rf.getId(id);
+        if(a == id){
+        rf.removeRegla(id);
+        numRules--;
+        init();
+        } else {
+        System.out.println("Error");
+        }
+        }
+    
+    public void listReglas(){
+        List<Integer> list = rf.listReglas();
+        for (Integer integer : list) {
+            reglas.add(integer);
+            numRules++;
+        }
+    }
+    
+    public List<Integer> getReglas(){
+    return reglas;
+    }
+    }
