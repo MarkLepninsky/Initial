@@ -5,120 +5,139 @@
     <h:head>
         <title>Ejemplo Navegación Explicita</title>
         <style>
-            body {
-                font-family: Arial, sans-serif;
+            body, html {
+                height: 100%;
                 margin: 0;
-                padding: 0;
-                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
             }
-            h1 {
+
+            .content-container {
                 text-align: center;
-                margin-top: 30px;
-            }
-            .container {
-                width: 80%;
-                max-width: 1000px;
-                margin: 0 auto;
                 padding: 20px;
-                background-color: #fff;
+                background-color: #ffffff;
                 border-radius: 8px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
             }
-            p {
-                font-size: 1.2em;
-                margin-top: 20px;
+
+            h1 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
             }
-            h:commandButton {
-                margin-top: 10px;
+
+            .btn {
+                margin: 10px;
                 padding: 10px 20px;
-                background-color: #4CAF50;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
                 color: white;
                 border: none;
-                border-radius: 5px;
                 cursor: pointer;
             }
-            h:commandButton:hover {
-                background-color: #45a049;
+
+            .btn:hover {
+                background-color: #0056b3;
             }
-            .section {
-                text-align: center;
+
+            .img-fluid {
+                max-width: 300px;
+                width: 100%;
                 margin-bottom: 20px;
             }
         </style>
     </h:head>
     <body>
         <h:form>
-            <div class="container">
+            <div class="context-container">
                 <h1>Admin Page</h1>
 
                 <div class="section">
-                    <p>Manejar jugador</p>
+                    <h2>Manejar jugador</h2>
                     <h:commandButton
                         value="Añadir Jugador"
                         action="#{NavBean.goToAddPlayer}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Actualizar Jugador"
                         action="#{NavBean.goToUpdatePlayer}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Eliminar Jugador"
                         action="#{NavBean.goToRemovePlayer}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Hacer Admin"
                         action="#{NavBean.goToCrearAdmin}"
+                        class="btn"
                     />
                 </div>
 
                 <div class="section">
-                    <p>Manejar Jugada</p>
+                    <h2>Manejar Jugada</h2>
                     <h:commandButton
                         value="Añadir Jugada"
                         action="#{NavBean.goToAddMove}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Eliminar Jugada"
                         action="#{NavBean.goToRemoveMove}"
+                        class="btn"
                     />
                 </div>
 
                 <div class="section">
-                    <p>Manejar Regla</p>
+                    <h2>Manejar Regla</h2>
                     <h:commandButton
                         value="Añadir Regla"
                         action="#{NavBean.goToAddRule}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Eliminar Regla"
-                        action="#{NavBean.goToRemoveRule}"/>
+                        action="#{NavBean.goToRemoveRule}"
+                        class="btn" />
                 </div>
 
                 <div class="section">
-                    <p>Ver listas</p>
+                    <h1>Ver listas</h1>
                     <h:commandButton
                         value="Lista de Jugadas"
                         action="#{NavBean.goToListGameMoves}"
+                        class="btn"
                     />
                     <h:commandButton
                         value="Lista Jugadores"
                         action="#{NavBean.goToListPlayers}"
+                        class="btn"
                     />
                 </div>
-                
                 <div class="section">
-                    <p>Jugar contra IA</p>
+                    <h2>Jugar contra IA</h2>
                     <h:commandButton
                         value="Jugar IA"
                         action="#{NavBean.goToIA}"
+                        class="btn"
                     />
                 </div>
 
                 <div class="section">
-                    <p>Logout</p>
+                    <h1>Logout</h1>
                     <h:commandButton
                         value="Logout"
                         action="#{NavBean.goToLogout}"
+                        class="btn"
                     />
                 </div>
             </div>

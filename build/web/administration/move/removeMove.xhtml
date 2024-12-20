@@ -9,33 +9,88 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Eliminar moviemiento</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .content-container {
+                text-align: center;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+            }
+
+            textStyle {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .btn {
+                margin: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            .select-menu {
+                margin-top: 10px;
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+        </style>
     </head>
     <body>
          <h:body>
+         <div class="content-container">
         <h:outputText value="Number of Players: #{move.numMoves}" />
         <h:form>
-            <h:outputLabel value="Select a Player: " />
+            <h:outputLabel value="Select a Player: "/>
             <h:selectOneMenu value="#{move.tempName}">
                 <f:selectItem itemValue="" itemLabel="Elige Jugador que quires eliminar"/>
                 <f:selectItems value="#{move.moves}" var="p"
                                itemValue="#{p.name}" 
                                itemLabel="#{p.name}" />
             </h:selectOneMenu>
-            <h:commandButton value="Delete Selected Player" action="#{move.deleteSelectedMove}" />
+            <h:commandButton value="Delete Selected Player" action="#{move.deleteSelectedMove}" class="btn"/>
             <br/>
              <h:commandButton
                    value="Volver a lista de Administracion"
                    action="#{NavBean.goToAdmin}"
+                   class="btn"
                 />
                 <h:commandButton
                    value="Logout"
                    action="#{NavBean.goToLogout}"
+                   class="btn"
                 />
            <br/>
         </h:form>
-        
+         </div>
+             
     </h:body>
     </body>
 </html>

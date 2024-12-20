@@ -1,3 +1,70 @@
+FcoJavier
+fco_javier
+En línea
+Mark Łepninsky, Ivan Uni, JiaJing Uni, Nuria Uni
+
+Nuria Uni — hoy a las 22:42
+Ahora en el gmail escribe lo que se necesita para tu presentacion
+Que te envio Ivan
+JiaJing Uni — hoy a las 22:43
+por favor un complemento indirecto
+de quien a quien
+yo a el o el a mi
+Mark Łepninsky — hoy a las 22:44
+no entiendo nada
+Nuria Uni — hoy a las 22:44
+Ivan envio el gmail a todos con las diapositivas
+Pues entra ahi
+Y escribe algo para tu parte para la hora de grabar tengamos unas diapositivas minimas
+Ivan Uni — hoy a las 22:44
+Os he compartido la presentación para que podaís poner cosas de lo que habeís hecho
+Nuria ESO NO
+PARA
+JiaJing Uni ha iniciado una llamada. — hoy a las 22:45
+Ivan Uni — hoy a las 22:45
+Nuria esto es una presentación
+No tienes que explicar todo en texto
+Solo mencionarlo como lo que yo hecho
+Después cuando tengas que hablar, lo resumes un poco
+Pero un poco, no mucho
+El video tiene que durar como mucho 5 minutos
+Esperar me conectaré con el móvil
+Espero que no
+La he hecho ahora en 10 minutos
+Si
+Se os ocurren más cosas que poner en Objetivos para Sprint 4?
+Tranquilos
+Nope
+Ivan Uni — hoy a las 22:52
+Ayer he hablado de que quedaramos pero al final fuimos Nuria y Yo
+Excepto Fran que se ha ofrecido y se lo perdono porque yo le he dicho que no hacía falta que viniera
+Pero os he dicho varias veces que teníamos que grabar un video todos juntos
+Objetivos para Este
+Sprint
+Y para el Sprint 4
+Los objetivos para el siguiente Sprint van al final
+Da igual el código
+Solo mostraremos el funcionamiento
+Esperemos que lo tenga Fran
+Peor caso Fran se conecta a mi tsir
+Yo no lo he hecho
+A no ser de que sea el "merge" que Ivan ha borrado xD
+Es su culpa por subir mal las cosas xD
+Porque Ivan
+Por eso
+Y le he dicho a Nuria que si hacia el push borraría lo tuyo xD
+Pero ella "No lo hará" 
+Como que "qué no?"
+Que pena
+Ivan Uni — hoy a las 23:00
+Último día no, la semana que viene el jueves se queda y se finaliza todo
+El viernes también si hace falta
+No te preocupes Nuria, le diremos al profesor que te ponga un 0
+xD
+Que?
+JiaJing Uni — hoy a las 23:14
+XDXDXDXDXDXDXDXD
+XDXDXDXDXDXDXD
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -60,36 +127,158 @@
                 border-radius: 5px;
                 border: 1px solid #ccc;
             }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+
+            th, td {
+                padding: 8px 12px;
+                text-align: center;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
         </style>
     </h:head>
     <h:body>
         <div class="content-container">
-            <!-- Información del torneo -->
-            <h1>Nombre del Torneo</h1>
-            <h2>Tu nombre vs NombreOponente</h2>
-
-            <!-- Primer formulario: Selección de movimiento -->
-            <h:form class="form-container">
-                <p>Selecciona un movimiento de la lista:</p>
-                <h:selectOneMenu value="" onchange="submit()" class="select-menu">
-                    <f:selectItem itemLabel="Selecciona Movimiento" itemValue="" noSelectionOption="true"/>
-                    <f:selectItem itemValue="0" itemLabel="Piedra" />
-                    <f:selectItem itemValue="1" itemLabel="Papel" />
-                    <f:selectItem itemValue="2" itemLabel="Tijera"/>
-                </h:selectOneMenu>
-            </h:form>
-
-            <!-- Segundo formulario: Confirmar y Volver -->
-            <h:form class="form-container">
-                <h:commandButton value="Confirmar" action="#{NavBean.gotoJugar_Partida}" class="btn" />
-            </h:form>
-
-            <h:form class="form-container">
+         <h1>Estado del Torneo</h1>
+            <h:form>
+                <h:dataTable value="#{tournament.getPlayers()}" var="player">
+                    <h:column>
+                        <f:facet name="header">Jugador</f:facet>
+                        #{player.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Movimiento</f:facet>
+                        #{tournament.playerMoves[player]}
+                    </h:column>
+                </h:dataTable>
+                
+                <h:commandButton value="Iniciar Torneo" action="#{tournament.startTournament(currentUser.id)}" class="btn" />
                 <h:commandButton value="Volver" action="#{NavBean.gotoCliente}" class="btn" />
             </h:form>
+... (4 líneas restantes)
+Contraer
+jugar_torneo.xhtml
+4 KB
 
-            <!-- Texto de estado de la partida -->
-            <p>Texto de estado de la partida</p>
-        </div>
+package Admin;
+
+import Admin.PlayerBean.Player;
+import Admin.RuleBean.Rule;
+import javax.inject.Named;
+Expandir
+TournamentBean.java
+5 KB
+﻿
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Torneo</title>
+        <style>
+            /* CSS para centrar el contenido */
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .content-container {
+                text-align: center;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .form-container {
+                margin-bottom: 20px;
+            }
+
+            h1, h2 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .btn {
+                margin-top: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            .select-menu {
+                margin-top: 10px;
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+
+            th, td {
+                padding: 8px 12px;
+                text-align: center;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="content-container">
+         <h1>Estado del Torneo</h1>
+            <h:form>
+                <h:dataTable value="#{tournament.getPlayers()}" var="player">
+                    <h:column>
+                        <f:facet name="header">Jugador</f:facet>
+                        #{player.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Movimiento</f:facet>
+                        #{tournament.playerMoves[player]}
+                    </h:column>
+                </h:dataTable>
+                
+                <h:commandButton value="Iniciar Torneo" action="#{tournament.startTournament(currentUser.id)}" class="btn" />
+                <h:commandButton value="Volver" action="#{NavBean.gotoCliente}" class="btn" />
+            </h:form>
+         </div>
     </h:body>
 </html>
