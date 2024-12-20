@@ -51,7 +51,7 @@ public class LoginBeanCliente implements Serializable {
     }
     
     public String loginCheck(){
-    if(this.username.equals(username) && this.password.equals(password) && password != null && username != null){
+    if((checkPassword(password)) && (checkUsername(username)) && password != null && username != null){
         log.info("Usuario y Contra verificados!!!!");
         int a = u.getId(username);
         boolean comp = u.ClientId(a);
@@ -76,7 +76,7 @@ public class LoginBeanCliente implements Serializable {
     
     public boolean checkUsername(String Nombre){
         String trueUsername = u.findName(Nombre);
-        if(trueUsername == null){
+        if(trueUsername.equals(Nombre)){
         return true;
         } else {
         return false;

@@ -41,15 +41,15 @@ public class Movimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    ////@NotNull
+    ////
     @Column(name = "idMovimiento")
     private Integer idMovimiento;
     @Basic(optional = false)
-    ////@NotNull
-    //@Size(min = 1, max = 45)
+    ////
+    ////@Size(min = 1, max = 45)
     @Column(name = "Nombre_Movimiento")
     private String nombreMovimiento;
-    //@Size(max = 45)
+    ////@Size(max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @JoinTable(name = "partida_has_movimiento", joinColumns = {

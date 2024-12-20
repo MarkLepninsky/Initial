@@ -38,21 +38,21 @@ public class Reglas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    ////@NotNull
+    ////
     @Column(name = "idReglas")
     private Integer idReglas;
     @Basic(optional = false)
-    ////@NotNull
+    ////
     @Column(name = "ID_MOV1")
     private int idMov1;
     @Basic(optional = false)
-    ////@NotNull
+    ////
     @Column(name = "ID_MOV2")
     private int idMov2;
-    //@Size(max = 45)
+    ////@Size(max = 45)
     @Column(name = "Resultado")
     private String resultado;
-    //@Size(max = 45)
+    ////@Size(max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @JoinColumn(name = "Movimiento_idMovimiento", referencedColumnName = "idMovimiento")

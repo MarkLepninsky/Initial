@@ -10,6 +10,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 @Named(value = "player")
@@ -20,17 +22,14 @@ public class PlayerBean implements Serializable {
     private UsuarioFacade u;
 
     public PlayerBean() {
-        players.add(new Player("Alice", "alice@example.com", "password123"));
-        players.add(new Player("Bob", "bob@example.com", "securepass456"));
-        players.add(new Player("Charlie", "charlie@example.com", "mypassword789"));
-        numPlayers = players.size();
+
     }
 
     private String tempName;
     private String mname;
     private String tempPass;
-    private int numPlayers = 0;
-
+    private int numPlayers;
+    private List<String> listUsuarios;
     private ArrayList<Player> players = new ArrayList<>();
 
     public class Player {
@@ -46,8 +45,9 @@ public class PlayerBean implements Serializable {
             this.pass = pass;
         }
 
-        public String getName() {
-            return name;
+        @PostConstruct
+        public void init() {
+            addListUsers();
         }
 
         public String getEmail() {
@@ -103,6 +103,7 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
+            numPlayers++;
             u.addClient(a);
         }
     }
@@ -136,7 +137,7 @@ public class PlayerBean implements Serializable {
             u.removeAdmin(a);
         }
     }
-    
+
     public void removeAdmin(String nombre) {
         int a;
         a = u.getId(nombre);
@@ -146,20 +147,21 @@ public class PlayerBean implements Serializable {
             u.removeAdmin(a);
         }
     }
-    
-    public void removeUser(){
+
+    public void removeUser() {
         removeClient(tempName);
         removeAdmin(tempName);
         int a;
         a = u.getId(tempName);
-        if(a == -1){
+        if (a == -1) {
             System.out.println("Error");
         } else {
+            numPlayers--;
             u.removeAccount(a);
         }
     }
-    
-    public void removeClient(){
+
+    public void removeClient() {
         int a;
         a = u.getId(tempName);
         if (a == -1) {
@@ -168,8 +170,8 @@ public class PlayerBean implements Serializable {
             u.removeClient(a);
         }
     }
-    
-    public void removeClient(String nombre){
+
+    public void removeClient(String nombre) {
         int a;
         a = u.getId(nombre);
         if (a == -1) {
@@ -178,22 +180,47 @@ public class PlayerBean implements Serializable {
             u.removeClient(a);
         }
     }
-    
-    public boolean checkPassword(String password){
+
+    public boolean checkPassword(String password) {
         String truePassword = u.findPassword(password);
-        if(password.equals(truePassword)){
-        return true;
+        if (password.equals(truePassword)) {
+            return true;
         } else {
-        return false;
+            return false;
         }
     }
-    
-    public boolean checkUsername(String Nombre){
+
+    public boolean checkUsername(String Nombre) {
         String trueUsername = u.findName(Nombre);
-        if(trueUsername == null){
-        return true;
+        if (trueUsername.equals(Nombre)) {
+            return true;
         } else {
-        return false;
+            return false;
         }
     }
+
+    public List<String> getUsers() {
+        List<String> list = u.listUsers();
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list;
+        }
+    }
+
+    public void addListUsers() {
+        List<String> list = getUsers();
+        for (String string : list) {
+            listUsuarios.add(string);
+        }
+    }
+
+    public int getNumUsers() {
+        return numPlayers;
+    }
+
+    public List<String> getListUsuarios() {
+        return listUsuarios;
+    }
+
 }

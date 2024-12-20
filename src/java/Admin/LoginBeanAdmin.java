@@ -8,6 +8,8 @@ package Admin;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
+import jpa.session.UsuarioFacade;
 
 /**
  *
@@ -16,6 +18,8 @@ import java.io.Serializable;
 @Named(value = "loginBeanAdmin")
 @SessionScoped
 public class LoginBeanAdmin implements Serializable {
+    @EJB
+    private UsuarioFacade u;
     private String username;
     private String password;
 
@@ -42,11 +46,33 @@ public class LoginBeanAdmin implements Serializable {
     }
     
     public String loginCheck(){
-    if(this.username.equals(username) && this.password.equals(password) && password != null && username != null){
+    if(checkPassword(password) && checkUsername(username) && password != null && username != null){
+    int a = u.getId(username);
+    if(u.AdminId(a)){
     return "/faces/administration/admin.xhtml?faces-redirect=true";
+    } else {
+    return "/faces/administration/adminLogIn.xhtml?faces-redirect=true";
+    }
     } else {
     return "/faces/administration/adminLogIn.xhtml?faces-redirect=true";
     }
     }
     
+        public boolean checkPassword(String password){
+        String truePassword = u.findPassword(password);
+        if(password.equals(truePassword)){
+        return true;
+        } else {
+        return false;
+        }
+    }
+    
+    public boolean checkUsername(String Nombre){
+        String trueUsername = u.findName(Nombre);
+        if(trueUsername.equals(Nombre)){
+        return true;
+        } else {
+        return false;
+        }
+    }
 }
