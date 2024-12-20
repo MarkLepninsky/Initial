@@ -128,6 +128,16 @@ public class PlayerBean implements Serializable {
             u.addAdmin(a);
         }
     }
+    
+        public void addAdmin(String nombre) {
+        int a;
+        a = u.getId(nombre);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            u.addAdmin(a);
+        }
+    }
 
     public void removeAdmin() {
         int a;
@@ -149,6 +159,20 @@ public class PlayerBean implements Serializable {
         }
     }
 
+    public void removeUser(String nombre) {
+        removeClient(nombre);
+        removeAdmin(nombre);
+        int a;
+        a = u.getId(nombre);
+        if (a == -1) {
+            System.out.println("Error");
+        } else {
+            numPlayers--;
+            u.removeAccount(a);
+            init();
+        }
+    }
+    
     public void removeUser() {
         removeClient(tempName);
         removeAdmin(tempName);
