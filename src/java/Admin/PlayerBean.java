@@ -45,11 +45,6 @@ public class PlayerBean implements Serializable {
             this.pass = pass;
         }
 
-        @PostConstruct
-        public void init() {
-            addListUsers();
-        }
-
         public String getEmail() {
             return email;
         }
@@ -58,6 +53,12 @@ public class PlayerBean implements Serializable {
             return pass;
         }
     }
+    
+        @PostConstruct
+        public void init() {
+            listUsuarios = new ArrayList<>();
+            addListUsers();
+        }
 
     public ArrayList<Player> getPlayers() {
         return players;

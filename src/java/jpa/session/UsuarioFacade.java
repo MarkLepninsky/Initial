@@ -106,7 +106,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public List<String> listUsers(){
-    List<String> list = em.createNativeQuery("SELECT idUsuario, Nombre, Password, N_Victorias, N_Derrotas, N_Empates, Ranking FROM usuario").getResultList();
+    List<String> list = em.createNativeQuery("SELECT Nombre FROM usuario").getResultList();
     return list;
     }
 }
