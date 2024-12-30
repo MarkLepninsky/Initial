@@ -54,7 +54,11 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
     
     public int getMaxId(){
     List<Integer> list = em.createNativeQuery("SELECT max(idReglas) FROM reglas").getResultList();
+    if(list.isEmpty()){
+    return 0;
+    } else {
     return list.get(0);
+    }
     }
     
     public int getId(int id){
@@ -72,6 +76,10 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
     
     public List<Integer> listReglas(){
     List<Integer> list = em.createNativeQuery("SELECT idReglas FROM reglas").getResultList();
+    if(list.isEmpty()){
+    return null;
+    } else {
     return list;
+    }
     }
 }

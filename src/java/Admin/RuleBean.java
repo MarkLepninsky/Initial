@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
@@ -36,7 +37,9 @@ public class RuleBean implements Serializable{
     private int numRules;
     private String resultado;
     private String descripcion;
+    @EJB
     private ReglasFacade rf;
+    @EJB
     private MovimientoFacade mf;
     private List<Integer> reglas;
     
@@ -61,8 +64,11 @@ public class RuleBean implements Serializable{
     
     @PostConstruct
     public void init(){
+        if(rf == null || mf == null){
+        throw new IllegalStateException("Error de inyección");
+        }
     reglas = new ArrayList<>();
-    listReglas();
+    listRegla();
     }
     
       public String getTempNameG() {
@@ -118,7 +124,7 @@ public class RuleBean implements Serializable{
         }
         }
     
-    public void listReglas(){
+    public void listRegla(){
         List<Integer> list = rf.listReglas();
         for (Integer integer : list) {
             reglas.add(integer);

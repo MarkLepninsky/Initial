@@ -55,7 +55,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public int getMaxId(){
     List<Integer> list = em.createNativeQuery("SELECT max(idUsuario) FROM usuario").getResultList();
+    if(list.isEmpty()){
+    return 0;
+    } else {
     return list.get(0);
+    }
     }
     
     public int getId(String nombre){
@@ -107,6 +111,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public List<String> listUsers(){
     List<String> list = em.createNativeQuery("SELECT Nombre FROM usuario").getResultList();
+    if(list.isEmpty()){
+    return null;
+    } else {
     return list;
+    }
     }
 }

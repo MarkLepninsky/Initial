@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
@@ -41,6 +42,7 @@ public class MoveBean implements Serializable{
     private String tempDescription;
     private int numMoves;
     private List<String> moves;
+    @EJB
     private MovimientoFacade mf;
     public class Move {
         
