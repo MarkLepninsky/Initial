@@ -44,6 +44,8 @@ public class MoveBean implements Serializable{
     private List<String> moves;
     @EJB
     private MovimientoFacade mf;
+    @EJB
+    private ReglasFacade rf;
     public class Move {
         
         public String name;
@@ -94,6 +96,8 @@ public class MoveBean implements Serializable{
      if(a == -1){
      System.out.println("Error");
      } else {
+     rf.removeReglaMove(a);
+     rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
      numMoves--;
      }
@@ -104,6 +108,8 @@ public class MoveBean implements Serializable{
      if(a == -1){
      System.out.println("Error");
      } else {
+     rf.removeReglaMove(a);
+     rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
      numMoves--;
      init();
@@ -112,7 +118,7 @@ public class MoveBean implements Serializable{
      
      public void createMove() {
          int a = mf.getMaxId();
-         mf.createMovimiento(a, tempName, tempDescription);
+         mf.createMovimiento(a+1, tempName, tempDescription);
     }
     
      public int getNumMoves() {

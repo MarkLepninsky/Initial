@@ -91,6 +91,13 @@ public class RuleBean implements Serializable{
         return numRules;
     }
     
+    public int getId(){
+    return id;
+    }
+    
+    public void setId(int id){
+    this.id = id;
+    }
     
     public void createRule() {
         int a = mf.findMovimiento(tempNameG);
@@ -99,28 +106,31 @@ public class RuleBean implements Serializable{
         System.out.println("Error");
         } else {
         int c = rf.getMaxId();
-        rf.createRegla(c, a, b, resultado, descripcion);
+        rf.createRegla(c+1, a, b, resultado, descripcion);
         }
     }
     
     public void deleteRule() {
-        int a = rf.getId(id);
-        if(a == id){
-        rf.removeRegla(id);
-        numRules--;
-        } else {
+        int a = mf.findMovimiento(tempNameG);
+        int b = mf.findMovimiento(tempNameP);
+        int c = rf.getId(a,b);
+        if(a == -1){
         System.out.println("Error");
+        } else {
+        rf.removeRegla(c);
+        numRules--;
         }
         }
     
-        public void deleteRule(int id) {
-        int a = rf.getId(id);
-        if(a == id){
-        rf.removeRegla(id);
-        numRules--;
-        init();
-        } else {
+    public void deleteRule(String tempNameG, String tempNameP) {
+        int a = mf.findMovimiento(tempNameG);
+        int b = mf.findMovimiento(tempNameP);
+        int c = rf.getId(a,b);
+        if(a == -1){
         System.out.println("Error");
+        } else {
+        rf.removeRegla(c);
+        numRules--;
         }
         }
     

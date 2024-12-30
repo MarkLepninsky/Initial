@@ -61,8 +61,8 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
     }
     }
     
-    public int getId(int id){
-    List<Integer> list = em.createNativeQuery("SELECT idReglas FROM reglas WHERE idReglas = ?").setParameter(1, id).getResultList();
+    public int getId(int id1, int id2){
+    List<Integer> list = em.createNativeQuery("SELECT idReglas FROM reglas WHERE Movimiento_idMovimiento = ? and Movimiento_idMovimiento1 = ?").setParameter(1, id1).setParameter(2, id2).getResultList();
     if(list.isEmpty()){
     return -1;
     } else {
@@ -72,6 +72,14 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
     
     public void removeRegla(int id){
     em.createNativeQuery("DELETE FROM reglas WHERE idReglas = ?").setParameter(1,id).executeUpdate();
+    }
+    
+    public void removeReglaMove(int id){
+    em.createNativeQuery("DELETE FROM reglas WHERE Movimiento_idMovimiento = ?").setParameter(1,id).executeUpdate();
+    }
+    
+    public void removeReglaMove1(int id){
+    em.createNativeQuery("DELETE FROM reglas WHERE Movimiento_idMovimiento1 = ?").setParameter(1,id).executeUpdate();
     }
     
     public List<Integer> listReglas(){
