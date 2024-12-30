@@ -4,8 +4,60 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Piedra Papel Tijera</title>
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .content-container {
+                text-align: center;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+            }
+
+            h1,h2,p {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .btn {
+                margin: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            .select-menu {
+                margin-top: 10px;
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+        </style>
     </h:head>
     <h:body>
+        <div class="content-container">
         <h1>Piedra, Papel o Tijera</h1>
         
         <h:form>
@@ -16,7 +68,7 @@
                 <f:selectItem itemValue="Tijera" itemLabel="Tijera" />
             </h:selectOneMenu>
             
-            <h:commandButton value="Jugar" action="#{juegoIABean.jugar}" />
+            <h:commandButton value="Jugar" action="#{juegoIABean.jugar}" class="btn"/>
         </h:form>
         
         <h:panelGroup rendered="#{not empty juegoIABean.resultado}">
@@ -24,5 +76,6 @@
             <p>Elección de la IA: #{juegoIABean.jugadaIA}</p>
             <p>Resultado: #{juegoIABean.resultado}</p>
         </h:panelGroup>
+        </div>
     </h:body>
 </html>
