@@ -65,14 +65,23 @@ public class NavBean {
         return "/faces/administration/move/removeMove.xhtml?faces-redirect=true";
     }
     
+        public String goToListMove()
+    {
+        return "/faces/administration/move/listGameMoves.xhtml?faces-redirect=true";
+    }
+            public String goToListRule()
+    {
+        return "/faces/administration/Rule/listRule.xhtml?faces-redirect=true";
+    }
+    
     public String goToAddRule()
     {
-        return "/faces/administration/rule/addRule.xhtml?faces-redirect=true";
+        return "/faces/administration/Rule/addRule.xhtml?faces-redirect=true";
     }
     
     public String goToRemoveRule()
     {  
-        return "/faces/administration/rule/removeRule.xhtml?faces-redirect=true";
+        return "/faces/administration/Rule/removeRule.xhtml?faces-redirect=true";
     }
     
     public String goToListGameMoves()

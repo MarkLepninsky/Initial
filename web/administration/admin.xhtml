@@ -108,13 +108,18 @@
                         value="Eliminar Regla"
                         action="#{NavBean.goToRemoveRule}"
                         class="btn" />
+                    
+                    <h:commandButton
+                        value="Lista Reglas"
+                        action="#{NavBean.goToListRule}"
+                        class="btn" />
                 </div>
 
                 <div class="section">
                     <h1>Ver listas</h1>
                     <h:commandButton
                         value="Lista de Jugadas"
-                        action="#{NavBean.goToListGameMoves}"
+                        action="#{NavBean.goToListMove}"
                         class="btn"
                     />
                     <h:commandButton
