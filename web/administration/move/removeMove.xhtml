@@ -8,9 +8,9 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <head>
-        <title>Añadir movimiento</title>
+        <title>Eliminar movimiento</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <style>
+<style>
             body, html {
                 height: 100%;
                 margin: 0;
@@ -51,6 +51,22 @@ and open the template in the editor.
 
             .btn:hover {
                 background-color: #0056b3;
+            }
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-family: Arial, sans-serif;
+            }
+
+            input[type="text"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
         </style>
     </head>
