@@ -117,4 +117,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     return list;
     }
     }
+    
+    public List<Usuario> listaUsuarios(){
+    return em.createNamedQuery("Usuario.findAll",Usuario.class).getResultList();
+    }
 }

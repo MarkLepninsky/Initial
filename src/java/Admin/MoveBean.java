@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
+import jpa.entities.*;
 
 /**
  *
@@ -41,11 +42,12 @@ public class MoveBean implements Serializable{
     private String tempName;
     private String tempDescription;
     private int numMoves;
-    private List<String> moves;
+    private List<Movimiento> moves;
     @EJB
     private MovimientoFacade mf;
     @EJB
     private ReglasFacade rf;
+    private Movimiento mov;
     public class Move {
         
         public String name;
@@ -125,16 +127,18 @@ public class MoveBean implements Serializable{
         return numMoves;
     }
      
-    public void listaMoves(){
-    List<String> list = mf.listMovimiento();
-    for(String string : list){
-    moves.add(string);
-    numMoves++;
+public void listaMoves() {
+    List<Movimiento> list = mf.listMovimientos();
+    moves.clear();
+    for (Movimiento mov : list) {
+        moves.add(mov);
     }
-    }
+    numMoves = moves.size();
+}
+
     
      
-    public List<String> getMoves() {
+    public List<Movimiento> getMoves() {
         return moves;
     }
 }

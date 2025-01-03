@@ -20,6 +20,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
 
     @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
+    private Movimiento mov;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -58,4 +59,8 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     return list;
     }
     
-}
+    public List<Movimiento> listMovimientos() {
+    return em.createNamedQuery("Movimiento.findAll", Movimiento.class).getResultList();
+        }
+
+    }
