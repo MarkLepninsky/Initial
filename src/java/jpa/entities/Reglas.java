@@ -123,7 +123,7 @@ public class Reglas implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Reglas[ idReglas=" + idReglas + " ]";
+        return "jpa.entities.Reglas[ idReglas=" + idReglas + "Resultado" + resultado +"Descripción"+ descripcion +"Primer Movimiento" + movimientoidMovimiento + "Segundo Movimiento" + movimientoidMovimiento1 + "]";
     }
     
 }

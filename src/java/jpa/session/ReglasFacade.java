@@ -90,4 +90,8 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
     return list;
     }
     }
+    
+    public List<Reglas> listaReglas(){
+    return em.createNamedQuery("Reglas.findAll",Reglas.class).getResultList();
+    }
 }

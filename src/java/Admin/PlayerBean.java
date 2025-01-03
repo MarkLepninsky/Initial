@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import jpa.entities.*;
 @Named(value = "player")
 @SessionScoped
 public class PlayerBean implements Serializable {
@@ -29,7 +29,7 @@ public class PlayerBean implements Serializable {
     private String mname;
     private String tempPass;
     private int numPlayers;
-    private List<String> listUsuarios;
+    private List<Usuario> listUsuarios;
     private ArrayList<Player> players = new ArrayList<>();
 
     public class Player {
@@ -224,8 +224,8 @@ public class PlayerBean implements Serializable {
         }
     }
 
-    public List<String> getUsers() {
-        List<String> list = u.listUsers();
+    public List<Usuario> getUsers() {
+        List<Usuario> list = u.listaUsuarios(); 
         if (list.isEmpty()) {
             return null;
         } else {
@@ -234,8 +234,8 @@ public class PlayerBean implements Serializable {
     }
 
     public void addListUsers() {
-        List<String> list = getUsers();
-        for (String string : list) {
+        List<Usuario> list = getUsers();
+        for (Usuario string : list) {
             listUsuarios.add(string);
         }
     }
@@ -244,7 +244,7 @@ public class PlayerBean implements Serializable {
         return numPlayers;
     }
 
-    public List<String> getListUsuarios() {
+    public List<Usuario> getListUsuarios() {
         return listUsuarios;
     }
 

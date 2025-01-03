@@ -25,9 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "admin")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a")
-    , @NamedQuery(name = "Admin.findByUsuarioidUsuario", query = "SELECT a FROM Admin a WHERE a.usuarioidUsuario = :usuarioidUsuario")})
+
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;

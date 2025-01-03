@@ -88,25 +88,38 @@
         </style>
     </head>
     <body>
-        <h:body>
+         <h:body>
         <h:form>
-            <h1>Lista de Reglas</h1>
-            <h:dataTable value="#{player.listUsuarios}" var="usuario" border="1" class="table">
-    <h:column>
-        <f:facet name="header">Nombre</f:facet>
-        #{usuario}
-    </h:column>
-    <h:column>
-        <f:facet name="header">Acciones</f:facet>
-        <h:commandButton value="Hacer Admin" action="#{player.addAdmin(usuario)}" class="btn"/>
-        <h:commandButton value="Eliminar Usuario" action="#{player.removeUser(usuario)}" class="btn"/>
-    </h:column>
-    </h:dataTable>
+            <h1>Lista de Jugadas</h1>
+
+            <h:dataTable value="#{rule.reglas}" var="p">
+                <h:column>
+                    <f:facet name="header">ID de la Regla </f:facet>
+                    #{p.idReglas}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Resultado</f:facet>
+                    #{p.resultado}
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">Descripcion de la Regla</f:facet>
+                    #{p.descripcion}
+                </h:column>
+                   <h:column>
+                       <f:facet name="header">ID del primer movimiento</f:facet>
+                    #{p.movimientoidMovimiento}
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">ID del segundo movimiento</f:facet>
+                    #{p.movimientoidMovimiento1}
+                </h:column>
+            </h:dataTable>
 
             <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn"/>
-            <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn"/>
+
+            <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
         </h:form>
-        </h:body>
+    </h:body>
     </body>
 </html>
 

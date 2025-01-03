@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
+import jpa.entities.*;
 
 /**
  *
@@ -41,7 +42,7 @@ public class RuleBean implements Serializable{
     private ReglasFacade rf;
     @EJB
     private MovimientoFacade mf;
-    private List<Integer> reglas;
+    private List<Reglas> reglas;
     
     public class Rule {
         
@@ -135,14 +136,14 @@ public class RuleBean implements Serializable{
         }
     
     public void listRegla(){
-        List<Integer> list = rf.listReglas();
-        for (Integer integer : list) {
+        List<Reglas> list = rf.listaReglas();
+        for (Reglas integer : list) {
             reglas.add(integer);
             numRules++;
         }
     }
     
-    public List<Integer> getReglas(){
+    public List<Reglas> getReglas(){
     return reglas;
     }
     }

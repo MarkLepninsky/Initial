@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
     , @NamedQuery(name = "Usuario.findByNVictorias", query = "SELECT u FROM Usuario u WHERE u.nVictorias = :nVictorias")
     , @NamedQuery(name = "Usuario.findByNDerrotas", query = "SELECT u FROM Usuario u WHERE u.nDerrotas = :nDerrotas")
-    , @NamedQuery(name = "Usuario.findByNEmpates", query = "SELECT u FROM Usuario u WHERE u.nEmpates = :nEmpates")
-    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
+    , @NamedQuery(name = "Usuario.findByNEmpates", query = "SELECT u FROM Usuario u WHERE u.nEmpates = :nEmpates")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,8 +62,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     ////
     ////@Size(min = 1, max = 45)
-    @Column(name = "email")
-    private String email;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Admin admin;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarioidUsuario1")
@@ -81,11 +78,10 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String nombre, String password, String email) {
+    public Usuario(Integer idUsuario, String nombre, String password) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.password = password;
-        this.email = email;
     }
 
     public Integer getIdUsuario() {
@@ -134,14 +130,6 @@ public class Usuario implements Serializable {
 
     public void setNEmpates(Integer nEmpates) {
         this.nEmpates = nEmpates;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Admin getAdmin() {
@@ -198,7 +186,6 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "jpa.entities.Usuario[ idUsuario=" + idUsuario + "Nombre" + nombre + "Password" + password + "N_Victorias" + nVictorias + "N_Derrotas" + nDerrotas + "N_Empates" + nEmpates + "]";
     }
-    
 }
