@@ -72,19 +72,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public void addAdmin(int id){
-    em.createNativeQuery("INSERT INTO admin (Usuario_idUsuario) VALUES (?)").setParameter(1,id).executeUpdate();
+    em.createNativeQuery("INSERT INTO admin (idAdmin) VALUES (?)").setParameter(1,id).executeUpdate();
     }
     
     public void addClient(int id){
-    em.createNativeQuery("INSERT INTO player (Usuario_idUsuario) VALUES (?)").setParameter(1,id).executeUpdate();
+    em.createNativeQuery("INSERT INTO player (idPlayer) VALUES (?)").setParameter(1,id).executeUpdate();
     }
     
     public void removeClient(int id){
-    em.createNativeQuery("DELETE FROM player WHERE Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
+    em.createNativeQuery("DELETE FROM player WHERE idPlayer = ?").setParameter(1,id).executeUpdate();
     }
     
     public void removeAdmin(int id){
-    em.createNativeQuery("DELETE FROM admin WHERE Usuario_idUsuario = ?").setParameter(1,id).executeUpdate();
+    em.createNativeQuery("DELETE FROM admin WHERE idAdmin = ?").setParameter(1,id).executeUpdate();
     }
     
     public void removeAccount(int id){
@@ -92,7 +92,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public boolean ClientId(int id){
-        List<Integer> list = em.createNativeQuery("SELECT Usuario_idUsuario FROM player WHERE Usuario_idUsuario = ?").setParameter(1,id).getResultList();
+        List<Integer> list = em.createNativeQuery("SELECT idPlayer FROM player WHERE idPlayer = ?").setParameter(1,id).getResultList();
         if(list.isEmpty()){
         return false;
         } else {
@@ -101,7 +101,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
     public boolean AdminId(int id){
-        List<Integer> list = em.createNativeQuery("SELECT Usuario_idUsuario FROM admin WHERE Usuario_idUsuario = ?").setParameter(1,id).getResultList();
+        List<Integer> list = em.createNativeQuery("SELECT idAdmin FROM admin WHERE idAdmin = ?").setParameter(1,id).getResultList();
         if(list.isEmpty()){
             return false;
         } else {

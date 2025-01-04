@@ -46,6 +46,9 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     
     public int getMaxId(){
     List<Integer> list = em.createNativeQuery("SELECT max(idMovimiento) FROM movimiento").getResultList();
+    if(list.isEmpty()){
+    return 0;
+    }
     return list.get(0);
     }
     

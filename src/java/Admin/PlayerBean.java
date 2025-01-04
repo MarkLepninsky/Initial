@@ -10,7 +10,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import jpa.entities.*;
@@ -31,6 +33,8 @@ public class PlayerBean implements Serializable {
     private int numPlayers;
     private List<Usuario> listUsuarios;
     private ArrayList<Player> players = new ArrayList<>();
+    private Usuario m;
+    private Usuario selectedPlayer;
 
     public class Player {
 
@@ -96,6 +100,7 @@ public class PlayerBean implements Serializable {
         int a = u.getMaxId();
         u.createAccount(tempName, tempPass, a + 1);
         addCliente(tempName);
+        init();
     }
 
     public void addCliente() {
@@ -104,7 +109,6 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
-            numPlayers++;
             u.addClient(a);
         }
     }
@@ -167,7 +171,6 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
-            numPlayers--;
             u.removeAccount(a);
             init();
         }
@@ -181,8 +184,8 @@ public class PlayerBean implements Serializable {
         if (a == -1) {
             System.out.println("Error");
         } else {
-            numPlayers--;
             u.removeAccount(a);
+            init();
         }
     }
 
@@ -235,8 +238,10 @@ public class PlayerBean implements Serializable {
 
     public void addListUsers() {
         List<Usuario> list = getUsers();
+        numPlayers = 0;
         for (Usuario string : list) {
             listUsuarios.add(string);
+            numPlayers++;
         }
     }
 
@@ -247,5 +252,32 @@ public class PlayerBean implements Serializable {
     public List<Usuario> getListUsuarios() {
         return listUsuarios;
     }
+    
+    public void clearName(){
+    tempName = null;
+    }
+    
+public void onPlayerChange() {
+    for (Usuario u : listUsuarios) {
+        if (u.getNombre().equals(tempName)) {
+            selectedPlayer = u;
+            break;
+        }
+    }
+}
+
+public Usuario getSelectedPlayer() {
+    return selectedPlayer;
+}
+
+public void setSelectedPlayer(Usuario selectedPlayer) {
+    this.selectedPlayer = selectedPlayer;
+}
+
+public void updatePlayer(String nombre, String password){
+selectedPlayer.setNombre(nombre);
+selectedPlayer.setPassword(password);
+}
+
 
 }

@@ -106,21 +106,21 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Victorias</f:facet>
-                            #{u.nVictorias}
+                            #{u.NVictorias}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Derrotas</f:facet>
-                            #{u.nDerrotas}
+                            #{u.NDerrotas}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Empates</f:facet>
-                            #{u.nEmpates}
+                            #{u.NEmpates}
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Acciones</f:facet>
-                        <h:commandButton value="Hacer Admin" action="#{player.addAdmin(usuario)}" class="btn"/>
-                        <h:commandButton value="Eliminar Usuario" action="#{player.removeUser(usuario)}" class="btn"/>
+                        <h:commandButton value="Hacer Admin" action="#{player.addAdmin(u.nombre)}" class="btn"/>
+                        <h:commandButton value="Eliminar Usuario" action="#{player.removeUser(u.nombre)}" class="btn"/>
                     </h:column>
                 </h:dataTable>
 

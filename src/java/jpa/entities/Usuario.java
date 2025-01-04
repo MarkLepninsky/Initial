@@ -58,18 +58,12 @@ public class Usuario implements Serializable {
     private Integer nDerrotas;
     @Column(name = "N_Empates")
     private Integer nEmpates;
+    @Column(name = "Ranking")
+    private Integer Ranking;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
     ////
     ////@Size(min = 1, max = 45)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Admin admin;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarioidUsuario1")
-    private Partida partida;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarioidUsuario2")
-    private Partida partida1;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Player player;
+
 
     public Usuario() {
     }
@@ -131,37 +125,13 @@ public class Usuario implements Serializable {
     public void setNEmpates(Integer nEmpates) {
         this.nEmpates = nEmpates;
     }
-
-    public Admin getAdmin() {
-        return admin;
+    
+    public void setRanking (Integer Ranking) {
+        this.Ranking = Ranking;
     }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public Partida getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
-    }
-
-    public Partida getPartida1() {
-        return partida1;
-    }
-
-    public void setPartida1(Partida partida1) {
-        this.partida1 = partida1;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+    
+    public Integer getRanking() {
+        return Ranking;
     }
 
     @Override

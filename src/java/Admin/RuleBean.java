@@ -108,6 +108,7 @@ public class RuleBean implements Serializable{
         } else {
         int c = rf.getMaxId();
         rf.createRegla(c+1, a, b, resultado, descripcion);
+        init();
         }
     }
     
@@ -119,7 +120,7 @@ public class RuleBean implements Serializable{
         System.out.println("Error");
         } else {
         rf.removeRegla(c);
-        numRules--;
+        init();
         }
         }
     
@@ -131,12 +132,13 @@ public class RuleBean implements Serializable{
         System.out.println("Error");
         } else {
         rf.removeRegla(c);
-        numRules--;
+        init();
         }
         }
     
     public void listRegla(){
         List<Reglas> list = rf.listaReglas();
+        numRules = 0;
         for (Reglas integer : list) {
             reglas.add(integer);
             numRules++;

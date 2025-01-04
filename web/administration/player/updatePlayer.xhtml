@@ -1,47 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>Actualizar Jugador</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-     <h:body>
-        <h:form>
-            <h:outputLabel value="Select a Player: " />
-            <h:selectOneMenu value="#{player.tempName}">
-                <f:selectItem itemValue="" itemLabel="Elige Jugador que quires eliminar"/>
-                <f:selectItems value="#{player.players}" var="p"
-                               itemValue="#{p.name}" 
-                               itemLabel="#{p.name}" />
-            </h:selectOneMenu>
-           <br/>
-           Nuevo nombre de Jugador:
-            <h:inputText value="#{player.mname}" />
-             <br/>
-           Nuevo email de Jugador: 
-           <h:inputText value="#{player.tempEmail}"/>
-           <br/>
-           Nueva contraseña de Jugador: 
-           <h:inputText value="#{player.tempPass}"/>
-            <br/>
-            <h:commandButton value="Modify Selected Player" action="#{player.modifySelectedPlayer}" />
-            <br/>
-             <h:commandButton
-                   value="Volver a lista de Administracion"
-                   action="#{NavBean.goToAdmin}"
-                />
-                <h:commandButton
-                   value="Logout"
-                   action="#{NavBean.goToLogout}"
-                />
-        </h:form>
-        
-    </h:body>
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .content-container {
+                text-align: center;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 800px;
+                width: 100%;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .btn {
+                margin: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-family: Arial, sans-serif;
+            }
+
+            input[type="text"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+        </style>
+    </h:head>
+    <body>
+        <div class="content-container">
+            <h:form>
+                <h1>Seleccionar Jugador:</h1>
+                <h:selectOneMenu value="#{player.tempName}">
+                    <f:selectItems value="#{player.listUsuarios}" var="u" itemLabel="#{u.nombre}" itemValue="#{u.nombre}" />
+                    <f:ajax render="playerDetails" listener="#{player.onPlayerChange}" />
+                </h:selectOneMenu>
+                 <h:commandButton value="Seleccionar" action="#{player.updatePlayer(player.selectedPlayer.nombre,player.selectedPlayer.password)}" class="btn" />
+                <br/>
+
+                
+                <h1>Nuevo Nombre de Jugador:</h1>
+                <h:inputText value="#{player.tempName}" id="playerDetails" disabled="false"/>
+                <br/>
+                <h1>Nueva Contraseña de Jugador:</h1>
+                <h:inputText value="#{player.tempPass}"  disabled="false"/>
+                <br/>
+                <h1>Victorias:</h1>
+                <h:outputText value="#{player.selectedPlayer.NVictorias}" />
+                <br/>
+                <h1>Derrotas:</h1>
+                <h:outputText value="#{player.selectedPlayer.NDerrotas}" />
+                <br/>
+                <h1>Empates:</h1>
+                <h:outputText value="#{player.selectedPlayer.NEmpates}" />
+                <br/>
+
+                <!-- Botón de actualización -->
+                <h:commandButton value="Cambiar" action="#{player.updatePlayer(player.tempName, player.tempPass)}" class="btn" />
+                <br/>
+
+                <!-- Otros botones -->
+                <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn" />
+                <br/>
+                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
+
+                <h:outputText value="Se ha modificado el jugador: #{player.tempName}" />
+            </h:form>
+        </div>
+    </body>
 </html>

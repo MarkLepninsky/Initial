@@ -101,7 +101,7 @@ public class MoveBean implements Serializable{
      rf.removeReglaMove(a);
      rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
-     numMoves--;
+     init();
      }
     }
      
@@ -113,7 +113,6 @@ public class MoveBean implements Serializable{
      rf.removeReglaMove(a);
      rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
-     numMoves--;
      init();
      }
     }
@@ -129,11 +128,12 @@ public class MoveBean implements Serializable{
      
 public void listaMoves() {
     List<Movimiento> list = mf.listMovimientos();
+    numMoves = 0;
     moves.clear();
     for (Movimiento mov : list) {
         moves.add(mov);
+        numMoves++;
     }
-    numMoves = moves.size();
 }
 
     
