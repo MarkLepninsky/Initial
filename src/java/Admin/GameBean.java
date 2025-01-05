@@ -9,7 +9,11 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.List;
+import jpa.session.*;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import jpa.entities.*;
 /**
  *
  * @author IVSTOYKO
@@ -17,9 +21,23 @@ import java.util.ArrayList;
 @Named(value = "game")
 @SessionScoped
 public class GameBean implements Serializable {
-    private ArrayList<Game> games = new ArrayList<>();
+    
+    @EJB
+    private PartidaFacade p;
+    private MoveFacade m;
+    
     private RuleBean ruleBean;
-
+    
+    private String tempName;
+    private String tempMov;
+    private int numPartidas;
+    private List<Partida> listGames;
+    private ArrayList<Game> games = new ArrayList<>();
+    private Partida m;
+    private Partida selectedPartida;
+    
+   
+    
     public class Game{
 
         private ArrayList<RuleBean.Rule> rules; 
@@ -89,13 +107,85 @@ public class GameBean implements Serializable {
         return games;
         }
     }
+
+    public Movimiento getMov() {
+        return mov;
+    }
+
+    public void setMov(Movimiento mov) {
+        this.mov = mov;
+    }
+    
+    public String getTempName() {
+        return tempName;
+    }
+
+    public void setTempName(String tempName) {
+        this.tempName = tempName;
+    }
+
+    public String getTempMov() {
+        return tempMov;
+    }
+
+    public void setTempMov(String tempMov) {
+        this.tempMov = tempMov;
+    }
+
+    public int getNumPartidas() {
+        return numPartidas;
+    }
+
+    public void setNumPartidas(int numPartidas) {
+        this.numPartidas = numPartidas;
+    }
+
+    public Partida getSelectedPartida() {
+        return selectedPartida;
+    }
+
+    public void setSelectedPartida(Partida selectedPartida) {
+        this.selectedPartida = selectedPartida;
+    }
     
   public GameBean() {
   }
+  @PostConstruct
+        public void init() {
+            listGames = new ArrayList<>();
+            addListGames();
+        }
+   public List<Partida> getPartidas() {
+        List<Partida> list = p.listaPartidas(); 
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list;
+        }
+    }
+   public void addListGames() {
+        List<Partida> list = getPartidas();
+        numPartidas = 0;
+        for (Partida string : list) {
+            listGames.add(string);
+            numPartidas++;
+        }
+    }
+  public void createGame() {
+        int a = p.getMaxId();
+        int movId = m.findMovimiento(tempMov);
+        p.createPartida(a+1, tempName, movId);
+        addPartida(a+1);
+        init();
+    }
+  
+  public void addPartida(int id) {
+        p.addPartida(id);
+        
+    }
+          
 
-
-
-
+  /*
   public PlayerBean.Player playGame(Game game){
       for(int i=0; i<game.rules.size();i++){
           if(game.rules.get(i).nameG.equals(game.mp1.name)&&game.rules.get(i).nameP.equals(game.mp2.name)){
@@ -104,5 +194,5 @@ public class GameBean implements Serializable {
               return game.player2;} 
       }
       return null;
-  }
+  }*/
 }

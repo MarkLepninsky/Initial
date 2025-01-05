@@ -30,8 +30,8 @@ public class PartidaFacade extends AbstractFacade<Partida> {
         super(Partida.class);
     }
     
-    public void crearPartida(int id, int rondas, int u1, int u2){
-    em.createNativeQuery("INSERT INTO partida values(?,0,0,?,0,0,?,?)").setParameter(1,id).setParameter(2,rondas).setParameter(3,u1).setParameter(4,u2).executeUpdate();
+    public void crearPartida(int id, int u1, int mov1){
+    em.createNativeQuery("INSERT INTO partida values(?,0,0,1,0,0,0,?,-1,?,-1)").setParameter(1,id).setParameter(2,u1).setParameter(3,mov1).executeUpdate();
     }
     
     public int getMaxid(){
@@ -49,5 +49,8 @@ public class PartidaFacade extends AbstractFacade<Partida> {
     
     public List<Partida> getPartida(int a){
     return em.createNativeQuery("SELECT * FROM partida WHERE idPartida = ?").setParameter(1, a).getResultList();
+    }
+    public void addPartida(int id){
+    em.createNativeQuery("INSERT INTO partida (idPartida) VALUES (?)").setParameter(1,id).executeUpdate();
     }
 }
