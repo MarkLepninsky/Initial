@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Partida.findByNRondas", query = "SELECT p FROM Partida p WHERE p.nRondas = :nRondas")
     , @NamedQuery(name = "Partida.findByNRondasHechas", query = "SELECT p FROM Partida p WHERE p.nRondasHechas = :nRondasHechas")
     , @NamedQuery(name = "Partida.findByNRondasGU1", query = "SELECT p FROM Partida p WHERE p.nRondasGU1 = :nRondasGU1")
-    , @NamedQuery(name = "Partida.findByNRondasGU2", query = "SELECT p FROM Partida p WHERE p.nRondasGU2 = :nRondasGU2")})
+    , @NamedQuery(name = "Partida.findByNRondasGU2", query = "SELECT p FROM Partida p WHERE p.nRondasGU2 = :nRondasGU2")
+    , @NamedQuery(name = "Partida.findByMovimiento1", query = "SELECT p FROM Partida p WHERE p.movimiento1 = :movimiento1")
+    , @NamedQuery(name = "Partida.findByMovimiento2", query = "SELECT p FROM Partida p WHERE p.movimiento2 = :movimiento2")})
 public class Partida implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,6 +73,10 @@ public class Partida implements Serializable {
     private Integer nRondasGU2;
     @ManyToMany(mappedBy = "partidaCollection")
     private Collection<Movimiento> movimientoCollection;
+    @Column(name = "Movimiento1")
+    private Integer movimiento1;
+    @Column(name = "Movimiento2")
+    private Integer movimiento2;
     @JoinColumn(name = "Usuario_idUsuario1", referencedColumnName = "idUsuario")
     @OneToOne(optional = false)
     private Usuario usuarioidUsuario1;
@@ -85,13 +91,31 @@ public class Partida implements Serializable {
         this.idPartida = idPartida;
     }
 
-    public Partida(Integer idPartida, int idU1, int idU2, int nRondas) {
+    public Partida(Integer idPartida, int idU1, int idU2, int nRondas, int mov1, int mov2) {
         this.idPartida = idPartida;
         this.idU1 = idU1;
         this.idU2 = idU2;
         this.nRondas = nRondas;
+        this.movimiento1 = mov1;
+        this.movimiento2 = mov2;
     }
 
+    public Integer getMovimiento1() {
+        return movimiento1;
+    }
+
+    public void setMovimiento1(Integer movimiento1) {
+        this.movimiento1 = movimiento1;
+    }
+
+    public Integer getMovimiento2() {
+        return movimiento2;
+    }
+
+    public void setMovimiento2(Integer movimiento2) {
+        this.movimiento2 = movimiento2;
+    }
+    
     public Integer getIdPartida() {
         return idPartida;
     }
