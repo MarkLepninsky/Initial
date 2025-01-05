@@ -163,6 +163,17 @@ public class GameBean implements Serializable {
             return list;
         }
     }
+   
+   public List<Partida> getPartidasTerminadas() {
+        List<Partida> list = p.listaPartidas(); 
+        List<Partida> listTemp = new List<>();
+        for (Partida partida : list){
+            if (partida.getMovimiento2() != -1) {
+                listTemp.add(partida);
+            }
+        }
+        return listTemp;
+    }
    public void addListGames() {
         List<Partida> list = getPartidas();
         numPartidas = 0;
@@ -181,7 +192,6 @@ public class GameBean implements Serializable {
   
   public void addPartida(int id) {
         p.addPartida(id);
-        
     }
           
 
