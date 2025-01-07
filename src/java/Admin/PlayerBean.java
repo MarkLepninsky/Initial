@@ -127,6 +127,7 @@ public class PlayerBean implements Serializable {
         int a;
         a = u.getId(tempName);
         if (a == -1) {
+            tempName = "Jugador no existe"; 
             System.out.println("Error");
         } else {
             u.addAdmin(a);
@@ -183,6 +184,7 @@ public class PlayerBean implements Serializable {
         a = u.getId(tempName);
         if (a == -1) {
             System.out.println("Error");
+            tempName = "Jugador no existe"; 
         } else {
             u.removeAccount(a);
             init();

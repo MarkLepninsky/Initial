@@ -7,6 +7,7 @@ package Admin;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject; 
 
 /**
  *
@@ -16,6 +17,12 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class NavBean {
 
+    @Inject 
+    private PlayerBean player; 
+    @Inject 
+    private MoveBean move; 
+    @Inject 
+    private RuleBean rule; 
     /**
      * Creates a new instance of NavBean
      */
@@ -32,11 +39,18 @@ public class NavBean {
     
         public String goToCrearAdmin()
     {
+        
         return "/faces/administration/crear_admin.xhtml?faces-redirect=true";
     }
     
     public String goToAdmin()
     {
+        player.setTempName("");
+       player.setTempPass("");
+       move.setTempName("");
+       move.setTempDescription("");
+       rule.setTempNameG("");
+       rule.setTempNameP("");
         return "/faces/administration/admin.xhtml?faces-redirect=true";
     }
     

@@ -103,11 +103,13 @@ public class RuleBean implements Serializable{
     public void createRule() {
         int a = mf.findMovimiento(tempNameG);
         int b = mf.findMovimiento(tempNameP);
+        String r = "Gana "+ tempNameG; 
+        String d = tempNameG +  " gana "  + tempNameP; 
         if(a == -1 || b == -1){
         System.out.println("Error");
         } else {
         int c = rf.getMaxId();
-        rf.createRegla(c+1, a, b, resultado, descripcion);
+        rf.createRegla(c+1, a, b, r, d);
         init();
         }
     }

@@ -97,6 +97,7 @@ public class MoveBean implements Serializable{
      int a = mf.findMovimiento(tempName);
      if(a == -1){
      System.out.println("Error");
+     tempName = "Move no existe"; 
      } else {
      rf.removeReglaMove(a);
      rf.removeReglaMove1(a);
