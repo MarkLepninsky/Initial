@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import jpa.session.*;
 import javax.annotation.PostConstruct;
@@ -27,7 +28,8 @@ public class GameBean implements Serializable {
     private MovimientoFacade m;
     @EJB
     private UsuarioFacade u;
-    private RuleBean ruleBean;
+    @EJB
+    private ReglasFacade rf;
     
     private String tempName;
     private String tempMov;
@@ -174,8 +176,24 @@ public class GameBean implements Serializable {
         init();
     }
   
-  public void JoinGame(){
-  
+  public void JoinGame(String nombre, int id){
+      int a = u.getId(tempName);
+      int movId = m.findMovimiento(nombre);
+      List<Partida> part = p.getPartida(id);
+      Partida pa = part.get(0);
+      pa.setIdU2(a);
+      pa.setIdMovimiento2(movId);
+      int b = pa.getIdMovimiento1();
+      List<Reglas> reglas = rf.listaReglas();
+      for(Reglas regla : reglas){
+      int c = regla.getMovimientoidMovimiento().getIdMovimiento();
+      int d = regla.getMovimientoidMovimiento1().getIdMovimiento();
+      if(c == b && movId == d){
+      pa.setGanadoU1(1);
+      } if (movId == c && b ==d){
+      pa.setGanadoU2(1);
+      }
+      }
   }
  
           

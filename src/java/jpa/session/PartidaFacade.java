@@ -50,7 +50,5 @@ public class PartidaFacade extends AbstractFacade<Partida> {
     public List<Partida> getPartida(int a){
     return em.createNativeQuery("SELECT * FROM partida WHERE idPartida = ?").setParameter(1, a).getResultList();
     }
-    public void addPartida(int id){
-    em.createNativeQuery("INSERT INTO partida (idPartida) VALUES (?)").setParameter(1,id).executeUpdate();
-    }
+
 }
