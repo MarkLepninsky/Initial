@@ -5,11 +5,14 @@
  */
 package jpa.session;
 
+import Admin.GameBean;
 import javax.ejb.Stateless;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import jpa.entities.Partida;
+import jpa.entities.Usuario;
 
 /**
  *
@@ -20,7 +23,7 @@ public class PartidaFacade extends AbstractFacade<Partida> {
 
     @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
-
+    private static final Logger logger = Logger.getLogger(PartidaFacade.class.getName());
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -45,10 +48,6 @@ public class PartidaFacade extends AbstractFacade<Partida> {
     
     public List<Partida> listaPartidas(){
     return em.createNamedQuery("Partida.findAll",Partida.class).getResultList();
-    }
-    
-    public List<Partida> getPartida(int a){
-    return em.createNativeQuery("SELECT * FROM partida WHERE idPartida = ?").setParameter(1, a).getResultList();
     }
 
 }
