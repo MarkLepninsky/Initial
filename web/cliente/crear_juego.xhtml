@@ -66,19 +66,18 @@
     <h:body>
        
         <div class="content-container">
+            <!-- Primer formulario: Selección de movimiento -->
             <h:form class="form-container">
                 <h1>Crear Juego</h1>
-                <h1>Introduce tu nombre de usuario</h1>
-                <h:inputText value="#{game.tempName}"/>
                 <p>Selecciona un movimiento de la lista:</p>
-                <h:selectOneMenu value="#{game.tempMov}" onchange="submit()" class="select-menu">
+                <h:selectOneMenu value="" onchange="submit()" class="select-menu">
                     <f:selectItem itemLabel="Selecciona Movimiento" itemValue="" noSelectionOption="true"/>
                     <f:selectItem itemValue="0" itemLabel="Piedra" />
                     <f:selectItem itemValue="1" itemLabel="Papel" />
                     <f:selectItem itemValue="2" itemLabel="Tijera"/>
                 </h:selectOneMenu>
-                
-                <h:commandButton value="Publicar Partida" action="#{game.createGame}" class="btn"/>
+          
+                <h:commandButton value="Publicar Partida" action="#{GameBean.CrearPartida}" class="btn"/>
                 <br /><br />
                 <h:commandButton value="Volver" action="#{NavBean.gotoCliente}" class="btn" />
             </h:form>
