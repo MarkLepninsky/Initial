@@ -62,10 +62,16 @@
     </h:head>
     <h:body>
         <div clas="context-container">
-        <h1>Lista Juego</h1>
-        <h:form>
-         <h:commandButton value="Jugar partida1" action= "#{GameBean.partidas}" class="btn" />
-        </h:form>
+            <h1>Lista Juego</h1>
+            <h:form>
+                <h:commandButton value="Jugar partida1" action= "#{GameBean.partidas}" class="btn" />
+            </h:form>
+            <br/>
+            <h:form>
+                <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
+                <br/>
+                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
+            </h:form>
         </div>
     </h:body>
 </html>

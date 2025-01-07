@@ -73,14 +73,18 @@
                 <p>Selecciona un movimiento de la lista:</p>
                 <h:selectOneMenu value="#{game.tempMov}" onchange="submit()" class="select-menu">
                     <f:selectItem itemLabel="Selecciona Movimiento" itemValue="" noSelectionOption="true"/>
-                    <f:selectItem itemValue="0" itemLabel="piedra" />
-                    <f:selectItem itemValue="1" itemLabel="papel" />
-                    <f:selectItem itemValue="2" itemLabel="tijera"/>
+                    <f:selectItem itemValue="0" itemLabel="Piedra" />
+                    <f:selectItem itemValue="1" itemLabel="Papel" />
+                    <f:selectItem itemValue="2" itemLabel="Tijera"/>
                 </h:selectOneMenu>
                 
                 <h:commandButton value="Publicar Partida" action="#{game.createGame}" class="btn"/>
                 <br /><br />
-                <h:commandButton value="Volver" action="#{NavBean.gotoCliente}" class="btn" />
+              </h:form>
+            <h:form>
+                <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
+                <br/>
+                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
             </h:form>
         </div>
     </h:body>
