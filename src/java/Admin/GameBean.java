@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Admin;
-import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -24,8 +23,10 @@ public class GameBean implements Serializable {
     
     @EJB
     private PartidaFacade p;
-    private MoveFacade m;
-    
+    @EJB
+    private MovimientoFacade m;
+    @EJB
+    private UsuarioFacade u;
     private RuleBean ruleBean;
     
     private String tempName;
@@ -33,7 +34,7 @@ public class GameBean implements Serializable {
     private int numPartidas;
     private List<Partida> listGames;
     private ArrayList<Game> games = new ArrayList<>();
-    private Partida m;
+    private Movimiento selectedMovimiento;
     private Partida selectedPartida;
     
    
@@ -44,14 +45,6 @@ public class GameBean implements Serializable {
         private PlayerBean.Player player1,player2;
         private MoveBean.Move mp1,mp2;
 
-        public Game (){
-            rules =  ruleBean.getRules();
-        }
-         public Game (PlayerBean.Player player1, MoveBean.Move mp1){
-            this.player1 = player1;
-            this.mp1 = mp1;
-            rules =  ruleBean.getRules();
-        }
         
         public PlayerBean.Player getPlayer1(){
             return player1;
@@ -85,35 +78,18 @@ public class GameBean implements Serializable {
         this.mp2 = mp2;
         }
         
-        public String CrearPartida(PlayerBean.Player jugador, MoveBean.Move mp1){
-            this.player1 = jugador;
-            this.mp1 = mp1;
-            Game game = new Game(jugador,mp1);
-            games.add(game);
-            return "Esperando jugador";
-        }
-        
-        public String agregarMovimientP2 (Game game, PlayerBean.Player player2, MoveBean.Move mp2){
-        game.player2 = player2;
-        game.mp2 = mp2;
-        PlayerBean.Player ganador = playGame(game);
-        String msj = "Ha ganado: ";
-        msj += ganador.getName();
-        games.remove(game);
-        return msj;
-        }
         
         public ArrayList<Game> partidas(){
         return games;
         }
     }
 
-    public Movimiento getMov() {
-        return mov;
+    public Movimiento getSelectedMovimiento() {
+        return selectedMovimiento;
     }
 
-    public void setMov(Movimiento mov) {
-        this.mov = mov;
+    public void setSelectedMovimiento(Movimiento mov) {
+        this.selectedMovimiento = mov;
     }
     
     public String getTempName() {
@@ -166,9 +142,9 @@ public class GameBean implements Serializable {
    
    public List<Partida> getPartidasTerminadas() {
         List<Partida> list = p.listaPartidas(); 
-        List<Partida> listTemp = new List<>();
+        List<Partida> listTemp = new ArrayList<>();
         for (Partida partida : list){
-            if (partida.getMovimiento2() != -1) {
+            if (partida.getIdMovimiento2() != -1) {
                 listTemp.add(partida);
             }
         }
@@ -183,9 +159,10 @@ public class GameBean implements Serializable {
         }
     }
   public void createGame() {
-        int a = p.getMaxId();
+        int a = p.getMaxid();
         int movId = m.findMovimiento(tempMov);
-        p.createPartida(a+1, tempName, movId);
+        int b = u.getId(tempName);
+        p.crearPartida(a+1, b, movId);
         addPartida(a+1);
         init();
     }
