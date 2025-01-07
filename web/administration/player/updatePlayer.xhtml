@@ -95,11 +95,9 @@
                 <h:outputText value="#{player.selectedPlayer.NEmpates}" />
                 <br/>
 
-                <!-- Botón de actualización -->
                 <h:commandButton value="Cambiar" action="#{player.updatePlayer(player.tempName, player.tempPass)}" class="btn" />
                 <br/>
 
-                <!-- Otros botones -->
                 <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn" />
                 <br/>
                 <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />

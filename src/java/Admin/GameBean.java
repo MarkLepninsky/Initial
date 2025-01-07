@@ -42,8 +42,9 @@ public class GameBean implements Serializable {
     private ArrayList<Game> games = new ArrayList<>();
     private Movimiento selectedMovimiento;
     private Partida selectedPartida;
+    private int idPartida;
     private static final Logger logger = Logger.getLogger(GameBean.class.getName());
-    
+
     public class Game {
 
         private ArrayList<RuleBean.Rule> rules;
@@ -127,6 +128,14 @@ public class GameBean implements Serializable {
         this.numPartidas = numPartidas;
     }
 
+    public int getIdPartida() {
+        return idPartida;
+    }
+
+    public void setIdPartida(int idPartida) {
+        this.idPartida = idPartida;
+    }
+
     public Partida getSelectedPartida() {
         return selectedPartida;
     }
@@ -186,33 +195,59 @@ public class GameBean implements Serializable {
         p.crearPartida(a + 1, b, movId);
         init();
     }
-// Cambia "TuClase" por el nombre de tu clase
 
-    public void JoinGame(String nombre, int id) {
+    public void onGameChange() {
+
         int a = u.getId(tempName);
-        int movId = m.findMovimiento(nombre);
-        List<Partida> part = p.listaPartidas();
-        for (Partida pa : part) {
-            if(pa.getIdPartida() == id){
-            pa.setIdU2(a);
-            pa.setIdMovimiento2(movId);
-            int b = pa.getIdMovimiento1();
-            List<Reglas> reglas = rf.listaReglas();
-            for (Reglas regla : reglas) {
-                int c = regla.getMovimientoidMovimiento().getIdMovimiento();
-                int d = regla.getMovimientoidMovimiento1().getIdMovimiento();
-                if (c == b && movId == d) {
-                    pa.setGanadoU1(1);
-                }
-                if (movId == c && b == d) {
-                    pa.setGanadoU2(1);
-                }
+        int b = m.findMovimiento(tempMov);
+        for (Partida p : listGames) {
+            if (p.getIdPartida().equals(idPartida) || p.getIdPartida() == idPartida) {
+                p.setIdU2(a);
+                p.setIdMovimiento2(b);
             }
+        }
+    }
+    
+    public void onPartidaChange() {
+    for (Partida p : listGames) {
+        if (p.getIdPartida().equals(idPartida)) {
+            selectedPartida = p;
+            break;
         }
     }
 }
 
-
+    public void updatePartida(int id, int move) {
+       int a = selectedPartida.getIdU1();
+       int b = selectedPartida.getIdMovimiento1();
+       int c = selectedPartida.getIdPartida();
+       p.eliminarPartida(c);
+       p.unirPartida(c,a,b,id,move);
+    }
+}
+public void JoinGame(String nombre, int id) {
+        int a = u.getId(tempName);
+        int movId = m.findMovimiento(nombre);
+        List<Partida> part = p.listaPartidas();
+        for (Partida pa : part) {
+            if (pa.getIdPartida().equals(id)) {
+                pa.setIdU2(a);
+                pa.setIdMovimiento2(movId);
+                int b = pa.getIdMovimiento1();
+                List<Reglas> reglas = rf.listaReglas();
+                for (Reglas regla : reglas) {
+                    int c = regla.getMovimientoidMovimiento().getIdMovimiento();
+                    int d = regla.getMovimientoidMovimiento1().getIdMovimiento();
+                    if (c == b && movId == d) {
+                        pa.setGanadoU1(1);
+                    }
+                    if (movId == c && b == d) {
+                        pa.setGanadoU2(1);
+                    }
+                }
+            }
+        }
+    }
 
     /*
   public PlayerBean.Player playGame(Game game){

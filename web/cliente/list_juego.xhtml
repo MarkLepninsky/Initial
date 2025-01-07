@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Lista Juegos</title>
+        <title>Actualizar Jugador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style>
             body, html {
                 height: 100%;
@@ -27,10 +27,6 @@
                 width: 100%;
             }
 
-            .form-container {
-                margin-bottom: 20px;
-            }
-
             h1 {
                 margin-bottom: 20px;
                 font-size: 24px;
@@ -38,7 +34,7 @@
             }
 
             .btn {
-                margin-top: 10px;
+                margin: 10px;
                 padding: 10px 20px;
                 font-size: 16px;
                 border-radius: 5px;
@@ -53,48 +49,51 @@
                 background-color: #0056b3;
             }
 
-            .select-menu {
-                margin-top: 10px;
-                padding: 8px;
-                font-size: 16px;
-                border-radius: 5px;
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
                 border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-family: Arial, sans-serif;
+            }
+
+            input[type="text"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
         </style>
     </h:head>
-    <h:body>
+    <body>
         <div class="content-container">
-            <h1>Lista Juego</h1>
             <h:form>
-            <h1>Introduce tu nombre de usuario</h1>
-            <h:inputText value="#{game.tempName}"/>
-                <h:dataTable value="#{game.listGames}" var="p">
-                    <h:column>
-                        <f:facet name="header">Id Partida</f:facet>
-                            #{p.idPartida}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Usuario</f:facet>
-                            #{p.idU1}
-                    </h:column>
-                    <h:column>
-                        <h:selectOneMenu value="#{game.tempMov}" class="select-menu">
-                    <f:selectItem itemLabel="Select Mov " itemValue="" noSelectionOption="true"/>
-                    <f:selectItems value="#{move.moves}" var="p" itemLabel="#{p.nombreMovimiento}" itemValue="#{p.nombreMovimiento}" />
+                <h1>Seleccionar Jugador:</h1>
+                <h:selectOneMenu value="#{game.idPartida}">
+                    <f:selectItems value="#{game.listGames}" var="u" itemLabel="#{u.idPartida}" itemValue="#{u.idPartida}" />
+                    <f:ajax render="Partida" listener="#{game.onPartidaChange}" />
                 </h:selectOneMenu>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Jugar Partida" action="#{game.JoinGame(tempMov, p.idPartida)}" class="btn" />
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-            <br/>
+                <h:commandButton value="Seleccionar" action="#{game.updatePartida(game.selectedPartida.idU2,game.selectedPartida.idMovimiento2)}" class="btn" />
+                <br/>
 
-            <h:form>
-                <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
+                
+                <h1>Nombre del jugador:</h1>
+                <h:inputText value="#{game.tempName}" id="playerDetails" disabled="false"/>
+                <br/>
+                <h1>Movimiento:</h1>
+                <h:inputText value="#{game.tempMov}"  disabled="false"/>
+
+                <h:commandButton value="Jugar" action="#{game.updatePartida(game.tempName, game.tempMov)}" class="btn" />
+                <br/>
+
+                <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn" />
                 <br/>
                 <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
+
+                <h:outputText value="Se ha modificado el jugador: #{player.tempName}" />
             </h:form>
         </div>
-    </h:body>
+    </body>
 </html>

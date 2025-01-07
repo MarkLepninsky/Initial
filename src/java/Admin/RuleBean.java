@@ -116,7 +116,9 @@ public class RuleBean implements Serializable{
         int a = mf.findMovimiento(tempNameG);
         int b = mf.findMovimiento(tempNameP);
         int c = rf.getId(a,b);
-        if(a == -1){
+        if(a == -1 || b == -1){
+            tempNameG = " No existe"; 
+            tempNameP = " No existe"; 
         System.out.println("Error");
         } else {
         rf.removeRegla(c);

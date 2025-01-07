@@ -89,7 +89,10 @@ public class Partida implements Serializable {
         this.idU2 = idU2;
         this.nRondas = nRondas;
     }
-
+    public Partida(int idU2) {
+        this.idU2 = idU2;
+    }
+    
     public Integer getIdPartida() {
         return idPartida;
     }
