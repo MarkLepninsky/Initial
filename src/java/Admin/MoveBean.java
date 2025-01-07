@@ -120,6 +120,7 @@ public class MoveBean implements Serializable{
      public void createMove() {
          int a = mf.getMaxId();
          mf.createMovimiento(a+1, tempName, tempDescription);
+         init();
     }
     
      public int getNumMoves() {

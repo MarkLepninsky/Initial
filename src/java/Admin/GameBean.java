@@ -33,6 +33,7 @@ public class GameBean implements Serializable {
     private String tempMov;
     private int numPartidas;
     private List<Partida> listGames;
+    private List<Partida> listFinishedGames;
     private ArrayList<Game> games = new ArrayList<>();
     private Movimiento selectedMovimiento;
     private Partida selectedPartida;
@@ -131,6 +132,7 @@ public class GameBean implements Serializable {
             listGames = new ArrayList<>();
             addListGames();
         }
+        
    public List<Partida> getPartidas() {
         List<Partida> list = p.listaPartidas(); 
         if (list.isEmpty()) {
@@ -140,15 +142,13 @@ public class GameBean implements Serializable {
         }
     }
    
-   public List<Partida> getPartidasTerminadas() {
+   public void getPartidasTerminadas() {
         List<Partida> list = p.listaPartidas(); 
-        List<Partida> listTemp = new ArrayList<>();
         for (Partida partida : list){
             if (partida.getIdMovimiento2() != -1) {
-                listTemp.add(partida);
+                listFinishedGames.add(partida);
             }
         }
-        return listTemp;
     }
    public void addListGames() {
         List<Partida> list = getPartidas();
@@ -163,13 +163,21 @@ public class GameBean implements Serializable {
         int movId = m.findMovimiento(tempMov);
         int b = u.getId(tempName);
         p.crearPartida(a+1, b, movId);
-        addPartida(a+1);
         init();
     }
   
-  public void addPartida(int id) {
-        p.addPartida(id);
+    public void createGame(String nombre) {
+        int a = p.getMaxid();
+        int movId = m.findMovimiento(nombre);
+        int b = u.getId(tempName);
+        p.crearPartida(a+1, b, movId);
+        init();
     }
+  
+  public void JoinGame(){
+  
+  }
+ 
           
 
   /*

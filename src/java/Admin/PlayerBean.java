@@ -279,5 +279,4 @@ selectedPlayer.setNombre(nombre);
 selectedPlayer.setPassword(password);
 }
 
-
 }
