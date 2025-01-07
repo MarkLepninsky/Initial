@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Lista de Movimientos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style>
             body, html {
@@ -95,20 +95,20 @@ and open the template in the editor.
     <body>
          <h:body>
         <h:form>
-            <h1>Lista de Jugadores</h1>
+            <h1>Lista de Movimientos</h1>
 
             <h:dataTable value="#{move.moves}" var="p">
                 <h:column>
-                    <f:facet name="header">Nombre de Jugada</f:facet>
-                    #{p.name}
+                    <f:facet name="header">Nombre de Movimiento</f:facet>
+                    #{p.nombreMovimiento}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Descripcion de Jugada</f:facet>
-                    #{p.description}
+                    <f:facet name="header">Descripcion de Movimiento</f:facet>
+                    #{p.descripcion}
                 </h:column>
             </h:dataTable>
 
-            <h:commandButton value="Admin" action="#{NavBean.goToAdmin}" class="btn"/>
+            <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn"/>
 
             <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
         </h:form>

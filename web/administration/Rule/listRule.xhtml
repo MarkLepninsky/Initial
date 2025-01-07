@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>Lista de Jugadores</title>
+        <title>Lista de Reglas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style>
             body, html {
@@ -88,45 +88,38 @@
         </style>
     </head>
     <body>
-        <h:body>
-            <h:form>
-                <h1>Lista de Jugadores</h1>
-                <h:dataTable value="#{player.listUsuarios}" var="u" border="1" class="table">
-                    <h:column>
-                        <f:facet name="header">ID del Usuario</f:facet>
-                            #{u.idUsuario}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Nombre del Usuario</f:facet>
-                            #{u.nombre}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Contraseña del Usuario</f:facet>
-                            #{u.password}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Victorias</f:facet>
-                            #{u.NVictorias}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Derrotas</f:facet>
-                            #{u.NDerrotas}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Empates</f:facet>
-                            #{u.NEmpates}
-                    </h:column>
+         <h:body>
+        <h:form>
+            <h1>Lista de Reglas</h1>
 
-                    <h:column>
-                        <f:facet name="header">Acciones</f:facet>
-                        <h:commandButton value="Hacer Admin" action="#{player.addAdmin(u.nombre)}" class="btn"/>
-                        <h:commandButton value="Eliminar Usuario" action="#{player.removeUser(u.nombre)}" class="btn"/>
-                    </h:column>
-                </h:dataTable>
+            <h:dataTable value="#{rule.reglas}" var="p">
+                <h:column>
+                    <f:facet name="header">ID de la Regla </f:facet>
+                    #{p.idReglas}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Resultado</f:facet>
+                    #{p.resultado}
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">Descripcion de la Regla</f:facet>
+                    #{p.descripcion}
+                </h:column>
+                   <h:column>
+                       <f:facet name="header">ID del primer movimiento</f:facet>
+                    #{p.movimientoidMovimiento}
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">ID del segundo movimiento</f:facet>
+                    #{p.movimientoidMovimiento1}
+                </h:column>
+            </h:dataTable>
 
-                <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn"/>
-                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn"/>
-            </h:form>
-        </h:body>
+            <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn"/>
+
+            <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
+        </h:form>
+    </h:body>
     </body>
 </html>
+

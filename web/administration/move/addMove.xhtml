@@ -52,15 +52,31 @@ and open the template in the editor.
             .btn:hover {
                 background-color: #0056b3;
             }
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-family: Arial, sans-serif;
+            }
+
+            input[type="text"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
         </style>
     </head>
     <body>
         <h:form>
             <div class ="context-container">
-            <h1>Nombre de Jugada: </h1>
+            <h1>Nombre de Movimiento: </h1>
            <h:inputText value="#{move.tempName}"/>
            <br/>
-           <h1>Descripcion de Jugada: </h1>
+           <h1>Descripcion de Movimiento: </h1>
            <h:inputText value="#{move.tempDescription}"/>
            <br/>
     
@@ -82,6 +98,8 @@ and open the template in the editor.
                    class="btn"
                 />
             </div>
+            <h:outputText value ="Se ha añadido el movimiento: #{move.tempName}"></h:outputText>
+         
         </h:form>
     </body>
 </html>

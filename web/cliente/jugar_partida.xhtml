@@ -66,7 +66,6 @@
         <div class="content-container">
             <!-- Información del juego -->
             <h1>Te has unido a un juego</h1>
-
             <!-- Primer formulario: Selección de movimiento -->
             <h:form class="form-container">
                 <p>Selecciona un movimiento de la lista:</p>
@@ -78,9 +77,10 @@
                 </h:selectOneMenu>
             </h:form>
 
-            <!-- Segundo formulario: Botón para Volver -->
-            <h:form class="form-container">
-                <h:commandButton value="Volver" action="#{GameBean.agregarMovimientP2}" class="btn" />
+           <h:form>
+                <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
+                <br/>
+                <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
             </h:form>
         </div>
     </h:body>

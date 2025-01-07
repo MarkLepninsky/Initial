@@ -10,9 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
+import jpa.entities.*;
 
 /**
  *
@@ -36,9 +38,11 @@ public class RuleBean implements Serializable{
     private int numRules;
     private String resultado;
     private String descripcion;
+    @EJB
     private ReglasFacade rf;
+    @EJB
     private MovimientoFacade mf;
-    private List<Integer> reglas;
+    private List<Reglas> reglas;
     
     public class Rule {
         
@@ -61,8 +65,11 @@ public class RuleBean implements Serializable{
     
     @PostConstruct
     public void init(){
+        if(rf == null || mf == null){
+        throw new IllegalStateException("Error de inyección");
+        }
     reglas = new ArrayList<>();
-    listReglas();
+    listRegla();
     }
     
       public String getTempNameG() {
@@ -85,48 +92,62 @@ public class RuleBean implements Serializable{
         return numRules;
     }
     
+    public int getId(){
+    return id;
+    }
+    
+    public void setId(int id){
+    this.id = id;
+    }
     
     public void createRule() {
         int a = mf.findMovimiento(tempNameG);
         int b = mf.findMovimiento(tempNameP);
+        String r = "Gana " + tempNameG;
+        String d = tempNameG +" gana "+tempNameP;
         if(a == -1 || b == -1){
         System.out.println("Error");
         } else {
         int c = rf.getMaxId();
-        rf.createRegla(c, a, b, resultado, descripcion);
+        rf.createRegla(c+1, a, b, r, d);
+        init();
         }
     }
     
     public void deleteRule() {
-        int a = rf.getId(id);
-        if(a == id){
-        rf.removeRegla(id);
-        numRules--;
-        } else {
+        int a = mf.findMovimiento(tempNameG);
+        int b = mf.findMovimiento(tempNameP);
+        int c = rf.getId(a,b);
+        if(a == -1){
         System.out.println("Error");
-        }
-        }
-    
-        public void deleteRule(int id) {
-        int a = rf.getId(id);
-        if(a == id){
-        rf.removeRegla(id);
-        numRules--;
+        } else {
+        rf.removeRegla(c);
         init();
-        } else {
-        System.out.println("Error");
         }
         }
     
-    public void listReglas(){
-        List<Integer> list = rf.listReglas();
-        for (Integer integer : list) {
+    public void deleteRule(String tempNameG, String tempNameP) {
+        int a = mf.findMovimiento(tempNameG);
+        int b = mf.findMovimiento(tempNameP);
+        int c = rf.getId(a,b);
+        if(a == -1){
+        System.out.println("Error");
+        } else {
+        rf.removeRegla(c);
+        init();
+        }
+        }
+    
+    public void listRegla(){
+        List<Reglas> list = rf.listaReglas();
+        numRules = 0;
+        for (Reglas integer : list) {
             reglas.add(integer);
             numRules++;
         }
     }
     
-    public List<Integer> getReglas(){
+    public List<Reglas> getReglas(){
     return reglas;
     }
     }

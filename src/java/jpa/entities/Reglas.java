@@ -29,8 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Reglas.findAll", query = "SELECT r FROM Reglas r")
     , @NamedQuery(name = "Reglas.findByIdReglas", query = "SELECT r FROM Reglas r WHERE r.idReglas = :idReglas")
-    , @NamedQuery(name = "Reglas.findByIdMov1", query = "SELECT r FROM Reglas r WHERE r.idMov1 = :idMov1")
-    , @NamedQuery(name = "Reglas.findByIdMov2", query = "SELECT r FROM Reglas r WHERE r.idMov2 = :idMov2")
     , @NamedQuery(name = "Reglas.findByResultado", query = "SELECT r FROM Reglas r WHERE r.resultado = :resultado")
     , @NamedQuery(name = "Reglas.findByDescripcion", query = "SELECT r FROM Reglas r WHERE r.descripcion = :descripcion")})
 public class Reglas implements Serializable {
@@ -43,12 +41,6 @@ public class Reglas implements Serializable {
     private Integer idReglas;
     @Basic(optional = false)
     ////
-    @Column(name = "ID_MOV1")
-    private int idMov1;
-    @Basic(optional = false)
-    ////
-    @Column(name = "ID_MOV2")
-    private int idMov2;
     ////@Size(max = 45)
     @Column(name = "Resultado")
     private String resultado;
@@ -68,35 +60,13 @@ public class Reglas implements Serializable {
     public Reglas(Integer idReglas) {
         this.idReglas = idReglas;
     }
-
-    public Reglas(Integer idReglas, int idMov1, int idMov2) {
-        this.idReglas = idReglas;
-        this.idMov1 = idMov1;
-        this.idMov2 = idMov2;
-    }
-
+    
     public Integer getIdReglas() {
         return idReglas;
     }
 
     public void setIdReglas(Integer idReglas) {
         this.idReglas = idReglas;
-    }
-
-    public int getIdMov1() {
-        return idMov1;
-    }
-
-    public void setIdMov1(int idMov1) {
-        this.idMov1 = idMov1;
-    }
-
-    public int getIdMov2() {
-        return idMov2;
-    }
-
-    public void setIdMov2(int idMov2) {
-        this.idMov2 = idMov2;
     }
 
     public String getResultado() {
@@ -153,7 +123,7 @@ public class Reglas implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Reglas[ idReglas=" + idReglas + " ]";
+        return "jpa.entities.Reglas[ idReglas=" + idReglas + "Resultado" + resultado +"Descripción"+ descripcion +"Primer Movimiento" + movimientoidMovimiento + "Segundo Movimiento" + movimientoidMovimiento1 + "]";
     }
     
 }

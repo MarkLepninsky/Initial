@@ -20,6 +20,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
 
     @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
+    private Movimiento mov;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -45,6 +46,9 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     
     public int getMaxId(){
     List<Integer> list = em.createNativeQuery("SELECT max(idMovimiento) FROM movimiento").getResultList();
+    if(list.isEmpty()){
+    return 0;
+    }
     return list.get(0);
     }
     
@@ -58,4 +62,8 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     return list;
     }
     
-}
+    public List<Movimiento> listMovimientos() {
+    return em.createNamedQuery("Movimiento.findAll", Movimiento.class).getResultList();
+        }
+
+    }

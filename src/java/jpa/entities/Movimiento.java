@@ -145,7 +145,7 @@ public class Movimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Movimiento[ idMovimiento=" + idMovimiento + " ]";
+        return nombreMovimiento;
     }
     
 }

@@ -7,6 +7,8 @@ package Admin;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import sun.audio.AudioPlayer;
+import javax.inject.Inject;
 
 /**
  *
@@ -18,7 +20,15 @@ public class NavBean {
 
     /**
      * Creates a new instance of NavBean
+     * 
      */
+    @Inject
+    private PlayerBean player;  
+    @Inject
+    private MoveBean move;  
+     @Inject
+    private RuleBean rule; 
+    
   public NavBean()
     {
     }
@@ -37,6 +47,13 @@ public class NavBean {
     
     public String goToAdmin()
     {
+        
+        player.setTempName("");
+        player.setTempPass("");
+        move.setTempName("");
+        move.setTempDescription("");
+        rule.setTempNameP("");
+        rule.setTempNameG("");
         return "/faces/administration/admin.xhtml?faces-redirect=true";
     }
     
@@ -65,14 +82,23 @@ public class NavBean {
         return "/faces/administration/move/removeMove.xhtml?faces-redirect=true";
     }
     
+        public String goToListMove()
+    {
+        return "/faces/administration/move/listGameMoves.xhtml?faces-redirect=true";
+    }
+            public String goToListRule()
+    {
+        return "/faces/administration/Rule/listRule.xhtml?faces-redirect=true";
+    }
+    
     public String goToAddRule()
     {
-        return "/faces/administration/rule/addRule.xhtml?faces-redirect=true";
+        return "/faces/administration/Rule/addRule.xhtml?faces-redirect=true";
     }
     
     public String goToRemoveRule()
     {  
-        return "/faces/administration/rule/removeRule.xhtml?faces-redirect=true";
+        return "/faces/administration/Rule/removeRule.xhtml?faces-redirect=true";
     }
     
     public String goToListGameMoves()
@@ -87,6 +113,7 @@ public class NavBean {
         return "/faces/cliente/login.xhtml?faces-redirect=true";
     }
     public String gotoCliente() {
+        
         return "/faces/cliente/cliente.xhtml?faces-redirect=true";
     }
 

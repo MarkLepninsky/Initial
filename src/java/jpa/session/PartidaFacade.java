@@ -5,10 +5,14 @@
  */
 package jpa.session;
 
+import Admin.GameBean;
 import javax.ejb.Stateless;
+import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import jpa.entities.Partida;
+import jpa.entities.Usuario;
 
 /**
  *
@@ -19,7 +23,7 @@ public class PartidaFacade extends AbstractFacade<Partida> {
 
     @PersistenceContext(unitName = "PapelPiedraTijerasPU")
     private EntityManager em;
-
+    private static final Logger logger = Logger.getLogger(PartidaFacade.class.getName());
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -29,4 +33,21 @@ public class PartidaFacade extends AbstractFacade<Partida> {
         super(Partida.class);
     }
     
+    public void crearPartida(int id, int u1, int mov1){
+    em.createNativeQuery("INSERT INTO partida values(?,0,0,1,0,0,0,?,-1,?,-1)").setParameter(1,id).setParameter(2,u1).setParameter(3,mov1).executeUpdate();
+    }
+    
+    public int getMaxid(){
+    List<Integer> list = em.createNativeQuery("SELECT max(idPartida) FROM partida").getResultList();
+    if(list.isEmpty()){
+    return 0;
+    } else {
+    return list.get(0);
+    }
+    }
+    
+    public List<Partida> listaPartidas(){
+    return em.createNamedQuery("Partida.findAll",Partida.class).getResultList();
+    }
+
 }

@@ -49,11 +49,11 @@ public class Partida implements Serializable {
     private Integer idPartida;
     @Basic(optional = false)
     ////
-    @Column(name = "ID_U1")
+    @Column(name = "idU1")
     private int idU1;
     @Basic(optional = false)
     ////
-    @Column(name = "ID_U2")
+    @Column(name = "idU2")
     private int idU2;
     @Column(name = "Ganado_U1")
     private Integer ganadoU1;
@@ -71,13 +71,11 @@ public class Partida implements Serializable {
     private Integer nRondasGU2;
     @ManyToMany(mappedBy = "partidaCollection")
     private Collection<Movimiento> movimientoCollection;
-    @JoinColumn(name = "Usuario_idUsuario1", referencedColumnName = "idUsuario")
-    @OneToOne(optional = false)
-    private Usuario usuarioidUsuario1;
-    @JoinColumn(name = "Usuario_idUsuario2", referencedColumnName = "idUsuario")
-    @OneToOne(optional = false)
-    private Usuario usuarioidUsuario2;
-
+    @Column(name = "idMovimiento1")
+    private Integer idMovimiento1;
+    @Column(name = "idMovimiento2")
+    private Integer idMovimiento2;
+    
     public Partida() {
     }
 
@@ -103,7 +101,23 @@ public class Partida implements Serializable {
     public int getIdU1() {
         return idU1;
     }
-
+    
+    public int getIdMovimiento1(){
+    return idMovimiento1;
+    }
+    
+    public void setIdMovimiento1(int idMovimiento1){
+    this.idMovimiento1 = idMovimiento1;
+    }
+    
+    public int getIdMovimiento2(){
+    return idMovimiento2;
+    }
+    
+    public void setIdMovimiento2(int idMovimiento2){
+    this.idMovimiento2 = idMovimiento2;
+    }
+    
     public void setIdU1(int idU1) {
         this.idU1 = idU1;
     }
@@ -171,22 +185,6 @@ public class Partida implements Serializable {
 
     public void setMovimientoCollection(Collection<Movimiento> movimientoCollection) {
         this.movimientoCollection = movimientoCollection;
-    }
-
-    public Usuario getUsuarioidUsuario1() {
-        return usuarioidUsuario1;
-    }
-
-    public void setUsuarioidUsuario1(Usuario usuarioidUsuario1) {
-        this.usuarioidUsuario1 = usuarioidUsuario1;
-    }
-
-    public Usuario getUsuarioidUsuario2() {
-        return usuarioidUsuario2;
-    }
-
-    public void setUsuarioidUsuario2(Usuario usuarioidUsuario2) {
-        this.usuarioidUsuario2 = usuarioidUsuario2;
     }
 
     @Override

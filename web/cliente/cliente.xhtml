@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Vista Cliente</title>
-        
+
         <style>
             body, html {
                 height: 100%;
@@ -67,7 +67,9 @@
                 <h:commandButton value="Jugar partida" action="#{NavBean.gotoList_Juego}" class="btn" />
                 <br/><br/>
                 <h2>O participar en un torneo?</h2>
-                <h:commandButton value="Jugar Torneo" action="#{Navbean.gotoJugar_Torneo}" class="btn" />
+                <h:commandButton value="Jugar Torneo" action="#{NavBean.gotoJugar_Torneo}" class="btn" />
+                <h2>O jugar contra la IA?</h2>
+                <h:commandButton value="Jugar IA" action="#{NavBean.goToIA}" class="btn"/>
                 <br></br>
                 <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
                 <br/><br/>

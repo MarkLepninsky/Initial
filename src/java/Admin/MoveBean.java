@@ -10,9 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import jpa.session.*;
 import javax.enterprise.context.SessionScoped;
+import jpa.entities.*;
 
 /**
  *
@@ -40,8 +42,12 @@ public class MoveBean implements Serializable{
     private String tempName;
     private String tempDescription;
     private int numMoves;
-    private List<String> moves;
+    private List<Movimiento> moves;
+    @EJB
     private MovimientoFacade mf;
+    @EJB
+    private ReglasFacade rf;
+    private Movimiento mov;
     public class Move {
         
         public String name;
@@ -90,10 +96,13 @@ public class MoveBean implements Serializable{
      public void deleteSelectedMove() {
      int a = mf.findMovimiento(tempName);
      if(a == -1){
+         tempName="Ya fue eliminado";
      System.out.println("Error");
      } else {
+     rf.removeReglaMove(a);
+     rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
-     numMoves--;
+     init();
      }
     }
      
@@ -102,31 +111,36 @@ public class MoveBean implements Serializable{
      if(a == -1){
      System.out.println("Error");
      } else {
+     rf.removeReglaMove(a);
+     rf.removeReglaMove1(a);
      mf.removeMovimiento(a);
-     numMoves--;
      init();
      }
     }
      
      public void createMove() {
          int a = mf.getMaxId();
-         mf.createMovimiento(a, tempName, tempDescription);
+         mf.createMovimiento(a+1, tempName, tempDescription);
+         init();
     }
     
      public int getNumMoves() {
         return numMoves;
     }
      
-    public void listaMoves(){
-    List<String> list = mf.listMovimiento();
-    for(String string : list){
-    moves.add(string);
-    numMoves++;
+public void listaMoves() {
+    List<Movimiento> list = mf.listMovimientos();
+    numMoves = 0;
+    moves.clear();
+    for (Movimiento mov : list) {
+        moves.add(mov);
+        numMoves++;
     }
-    }
+}
+
     
      
-    public List<String> getMoves() {
+    public List<Movimiento> getMoves() {
         return moves;
     }
 }

@@ -58,7 +58,7 @@
         <h:form>
             <div class="context-container">
                 <h1>Admin Page</h1>
-
+                <br></br>
                 <div class="section">
                     <h2>Manejar jugador</h2>
                     <h:commandButton
@@ -84,14 +84,14 @@
                 </div>
 
                 <div class="section">
-                    <h2>Manejar Jugada</h2>
+                    <h2>Manejar Movimiento</h2>
                     <h:commandButton
-                        value="Añadir Jugada"
+                        value="Añadir Movimiento"
                         action="#{NavBean.goToAddMove}"
                         class="btn"
                     />
                     <h:commandButton
-                        value="Eliminar Jugada"
+                        value="Eliminar Movimiento"
                         action="#{NavBean.goToRemoveMove}"
                         class="btn"
                     />
@@ -108,13 +108,18 @@
                         value="Eliminar Regla"
                         action="#{NavBean.goToRemoveRule}"
                         class="btn" />
+                    
+                    <h:commandButton
+                        value="Lista Reglas"
+                        action="#{NavBean.goToListRule}"
+                        class="btn" />
                 </div>
 
                 <div class="section">
                     <h1>Ver listas</h1>
                     <h:commandButton
-                        value="Lista de Jugadas"
-                        action="#{NavBean.goToListGameMoves}"
+                        value="Lista de Movimientos"
+                        action="#{NavBean.goToListMove}"
                         class="btn"
                     />
                     <h:commandButton
@@ -123,15 +128,7 @@
                         class="btn"
                     />
                 </div>
-                <div class="section">
-                    <h2>Jugar contra IA</h2>
-                    <h:commandButton
-                        value="Jugar IA"
-                        action="#{NavBean.goToIA}"
-                        class="btn"
-                    />
-                </div>
-
+                
                 <div class="section">
                     <h1>Logout</h1>
                     <h:commandButton
