@@ -34,10 +34,14 @@ public class GameBean implements Serializable {
     @EJB
     private ReglasFacade rf;
 
+    private List<Usuario> listInvitados;
+    private String participante;
     private String tempName;
     private String tempMov;
+    private String resultado;
     private int numPartidas;
     private List<Partida> listGames;
+    private List<Partida> listGamesTorneo;
     private List<Partida> listFinishedGames;
     private ArrayList<Game> games = new ArrayList<>();
     private Movimiento selectedMovimiento;
@@ -88,6 +92,10 @@ public class GameBean implements Serializable {
         public ArrayList<Game> partidas() {
             return games;
         }
+    }
+
+    public GameBean() {
+
     }
 
     public Movimiento getSelectedMovimiento() {
@@ -146,15 +154,46 @@ public class GameBean implements Serializable {
         this.selectedPartida = selectedPartida;
     }
 
-    public GameBean() {
+    public List<Usuario> getListInvitados() {
+        return listInvitados;
+    }
+
+    public void setListInvitados(List<Usuario> listInvitados) {
+        this.listInvitados = listInvitados;
+    }
+
+    public String getResulado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public String getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(String participante) {
+        this.participante = participante;
+    }
+
+    public void setListGamesTorneo(List<Partida> listGamesTorneo) {
+        this.listGamesTorneo = listGamesTorneo;
+    }
+
+    public List<Partida> setListGamesTorneo() {
+        return listGamesTorneo;
     }
 
     @PostConstruct
     public void init() {
+        listGamesTorneo = new ArrayList<>();
         listUsuarios = new ArrayList<>();
         listGames = new ArrayList<>();
         addListUsers();
         addListGames();
+        addTorneo();
     }
 
     public List<Partida> getPartidas() {
@@ -214,6 +253,14 @@ public class GameBean implements Serializable {
         }
     }
 
+    public void addTorneo() {
+        for (Usuario u : listUsuarios) {
+            if (u.getNombre().equals(tempName) && listInvitados.size() <= 3) {
+                listInvitados.add(u);
+            }
+        }
+    }
+
     public void onPartidaChange() {
         for (Partida p : listGames) {
             if (p.getIdPartida().equals(idPartida)) {
@@ -235,18 +282,21 @@ public class GameBean implements Serializable {
             int a = regla.getMovimientoidMovimiento().getIdMovimiento();
             int b = regla.getMovimientoidMovimiento1().getIdMovimiento();
             if (a == mov1 && b == mov2) {
+                resultado = "Has ganado";
                 onPlayerChange(u1);
                 updatePlayerG();
                 onPlayerChange(u2);
                 updatePlayerP();
                 p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
             } else if (a == mov2 && b == mov1) {
+                resultado = "Has perdido";
                 onPlayerChange(u2);
                 updatePlayerG();
                 onPlayerChange(u1);
                 updatePlayerP();
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
             } else if (mov1 == mov2) {
+                resultado = "Has empatado";
                 onPlayerChange(u1);
                 updatePlayerE();
                 onPlayerChange(u2);
@@ -330,6 +380,83 @@ public class GameBean implements Serializable {
         List<Usuario> list = getUsers();
         for (Usuario string : list) {
             listUsuarios.add(string);
+        }
+    }
+
+    public void StartTorneo() {
+        if (listInvitados.size() == 4) {
+            int u1 = -1;
+            int u2 = -1;
+            int u3 = -1;
+            int u4 = -1;
+            u1 = listInvitados.get(0).getIdUsuario();
+            u2 = listInvitados.get(1).getIdUsuario();
+            u3 = listInvitados.get(2).getIdUsuario();
+            u4 = listInvitados.get(4).getIdUsuario();
+            int id1 = p.getMaxid() + 1;
+            p.crearPartidaTorneo(id1, u1, u2);
+            int id2 = p.getMaxid() + 1;
+            p.crearPartidaTorneo(id2, u3, u4);
+            for (Partida pa : listGames) {
+                if (pa.getIdPartida() == id1) {
+                    listGamesTorneo.add(pa);
+                }
+                if (pa.getIdPartida() == id2) {
+                    listGamesTorneo.add(pa);
+                }
+            }
+        }
+
+        if (listInvitados.size() == 2) {
+            int u1 = -1;
+            int u2 = -1;
+            u1 = listInvitados.get(0).getIdUsuario();
+            u2 = listInvitados.get(1).getIdUsuario();
+            int id1 = p.getMaxid() + 1;
+            p.crearPartidaTorneo(id1, u1, u2);
+            for (Partida pa : listGames) {
+                if (pa.getIdPartida() == id1) {
+                    listGamesTorneo.add(pa);
+                }
+            }
+        }
+    }
+
+
+    public void updatePartidaTorneo(String us2, String movs2) {
+        int u2 = uf.getId(us2);
+        int mov2 = m.findMovimiento(movs2);
+        int u1 = selectedPartida.getIdU1();
+        int mov1 = selectedPartida.getIdMovimiento1();
+        int id = selectedPartida.getIdPartida();
+        p.eliminarPartida(id);
+        List<Reglas> reglas = rf.listaReglas();
+        for (Reglas regla : reglas) {
+            int a = regla.getMovimientoidMovimiento().getIdMovimiento();
+            int b = regla.getMovimientoidMovimiento1().getIdMovimiento();
+            if (a == mov1 && b == mov2) {
+                resultado = "Has ganado";
+                onPlayerChange(u1);
+                updatePlayerG();
+                onPlayerChange(u2);
+                updatePlayerP();
+                p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
+            } else if (a == mov2 && b == mov1) {
+                resultado = "Has perdido";
+                onPlayerChange(u2);
+                updatePlayerG();
+                onPlayerChange(u1);
+                updatePlayerP();
+                p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
+            } else if (mov1 == mov2) {
+                resultado = "Has empatado";
+                onPlayerChange(u1);
+                updatePlayerE();
+                onPlayerChange(u2);
+                updatePlayerE();
+                p.unirPartida(id, u1, mov1, u2, mov2, 0, 0);
+            }
+            init();
         }
     }
 }
