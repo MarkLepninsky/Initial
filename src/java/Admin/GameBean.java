@@ -36,6 +36,7 @@ public class GameBean implements Serializable {
 
     private String tempName;
     private String tempMov;
+    private String result = "Has...";
     private int numPartidas;
     private List<Partida> listGames;
     private List<Partida> listFinishedGames;
@@ -121,6 +122,15 @@ public class GameBean implements Serializable {
     public void setTempMov(String tempMov) {
         this.tempMov = tempMov;
     }
+    
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+    
 
     public int getNumPartidas() {
         return numPartidas;
@@ -235,6 +245,7 @@ public class GameBean implements Serializable {
             int a = regla.getMovimientoidMovimiento().getIdMovimiento();
             int b = regla.getMovimientoidMovimiento1().getIdMovimiento();
             if (a == mov1 && b == mov2) {
+                result = "Has ganado"; 
                 onPlayerChange(u1);
                 updatePlayerG();
                 onPlayerChange(u2);
@@ -242,6 +253,7 @@ public class GameBean implements Serializable {
                 p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
                 init();
             } else if (a == mov2 && b == mov1) {
+                result = "Has perdido"; 
                 onPlayerChange(u2);
                 updatePlayerG();
                 onPlayerChange(u1);
@@ -249,6 +261,7 @@ public class GameBean implements Serializable {
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
                 init();
             } else if (mov1 == mov2) {
+                result = "Has empatado"; 
                 onPlayerChange(u1);
                 updatePlayerE();
                 onPlayerChange(u2);

@@ -70,7 +70,7 @@
     <body>
         <div class="content-container">
             <h:form>
-                <h1>Seleccionar Jugador:</h1>
+                <h1>Seleccionar Partida:</h1>
                 <h:selectOneMenu value="#{game.idPartida}">
                     <f:selectItems value="#{game.listGames}" var="u" itemLabel="#{u.idPartida}" itemValue="#{u.idPartida}" />
                     <f:ajax render="Partida" listener="#{game.onPartidaChange}" />
@@ -86,6 +86,8 @@
                 <h:inputText value="#{game.tempMov}"  disabled="false"/>
 
                 <h:commandButton value="Jugar" action="#{game.updatePartida(game.tempName, game.tempMov)}" class="btn" />
+                <br/>
+                <h:outputText value ="#{game.result}"></h:outputText>
                 <br/>
 
                  <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
