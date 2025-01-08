@@ -41,8 +41,8 @@ public class PartidaFacade extends AbstractFacade<Partida> {
     em.createNativeQuery("DELETE FROM Partida WHERE idPartida = ?").setParameter(1,id).executeUpdate();
     }
     
-    public void unirPartida(int id, int u1, int mov1, int u2, int mov2){
-    em.createNativeQuery("INSERT INTO partida values(?,0,0,1,0,0,0,?,?,?,?)").setParameter(1,id).setParameter(2,u1).setParameter(3,u2).setParameter(4,mov1).setParameter(5,mov2).executeUpdate();
+    public void unirPartida(int id, int u1, int mov1, int u2, int mov2, int g1, int g2){
+    em.createNativeQuery("INSERT INTO partida values(?,?,?,1,0,0,0,?,?,?,?)").setParameter(1,id).setParameter(2,g1).setParameter(3,g2).setParameter(4,u1).setParameter(5,u2).setParameter(6,mov1).setParameter(7,mov2).executeUpdate();
     }
     
     public int getMaxid(){

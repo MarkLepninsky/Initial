@@ -43,6 +43,8 @@ public class GameBean implements Serializable {
     private Movimiento selectedMovimiento;
     private Partida selectedPartida;
     private int idPartida;
+    private List<Usuario> listUsuarios;
+    private Usuario selectedPlayer;
     private static final Logger logger = Logger.getLogger(GameBean.class.getName());
 
     public class Game {
@@ -149,7 +151,9 @@ public class GameBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        listUsuarios = new ArrayList<>();
         listGames = new ArrayList<>();
+        addListUsers();
         addListGames();
     }
 
@@ -207,49 +211,105 @@ public class GameBean implements Serializable {
             }
         }
     }
-    
-    public void onPartidaChange() {
-    for (Partida p : listGames) {
-        if (p.getIdPartida().equals(idPartida)) {
-            selectedPartida = p;
-            break;
-        }
-    }
-}
 
-    public void updatePartida(int id, int move) {
-       int a = selectedPartida.getIdU1();
-       int b = selectedPartida.getIdMovimiento1();
-       int c = selectedPartida.getIdPartida();
-       p.eliminarPartida(c);
-       p.unirPartida(c,a,b,id,move);
-    }
-}
-public void JoinGame(String nombre, int id) {
-        int a = u.getId(tempName);
-        int movId = m.findMovimiento(nombre);
-        List<Partida> part = p.listaPartidas();
-        for (Partida pa : part) {
-            if (pa.getIdPartida().equals(id)) {
-                pa.setIdU2(a);
-                pa.setIdMovimiento2(movId);
-                int b = pa.getIdMovimiento1();
-                List<Reglas> reglas = rf.listaReglas();
-                for (Reglas regla : reglas) {
-                    int c = regla.getMovimientoidMovimiento().getIdMovimiento();
-                    int d = regla.getMovimientoidMovimiento1().getIdMovimiento();
-                    if (c == b && movId == d) {
-                        pa.setGanadoU1(1);
-                    }
-                    if (movId == c && b == d) {
-                        pa.setGanadoU2(1);
-                    }
-                }
+    public void onPartidaChange() {
+        for (Partida p : listGames) {
+            if (p.getIdPartida().equals(idPartida)) {
+                selectedPartida = p;
+                break;
             }
         }
     }
 
-    /*
+    public void updatePartida(int u2, int mov2) {
+        int u1 = selectedPartida.getIdU1();
+        int mov1 = selectedPartida.getIdMovimiento1();
+        int id = selectedPartida.getIdPartida();
+        p.eliminarPartida(id);
+        List<Reglas> reglas = rf.listaReglas();
+        for (Reglas regla : reglas) {
+            int a = regla.getMovimientoidMovimiento().getIdMovimiento();
+            int b = regla.getMovimientoidMovimiento1().getIdMovimiento();
+            if (a == mov1 && b == mov2) {
+                onPlayerChange(u1);
+                updatePlayerG();
+                onPlayerChange(u2);
+                updatePlayerP();
+                p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
+            } else if (a == mov2 && b == mov1) {
+                onPlayerChange(u2);
+                updatePlayerG();
+                onPlayerChange(u1);
+                updatePlayerP();
+                p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
+            } else if (mov1 == mov2){
+                onPlayerChange(u1);
+                updatePlayerE();
+                onPlayerChange(u2);
+                updatePlayerE();
+                p.unirPartida(id, u1, mov1, u2, mov2, 0, 0);
+            }
+        }
+    }
+
+    public void onPlayerChange(int id) {
+        for (Usuario u : listUsuarios) {
+            if (u.getIdUsuario() == id) {
+                selectedPlayer = u;
+                break;
+            }
+        }
+    }
+
+    public Usuario getSelectedPlayer() {
+        return selectedPlayer;
+    }
+
+    public void setSelectedPlayer(Usuario selectedPlayer) {
+        this.selectedPlayer = selectedPlayer;
+    }
+
+    public void updatePlayerG() {
+        int a = selectedPlayer.getNVictorias();
+        a++;
+        selectedPlayer.setNVictorias(a);
+    }
+    public void updatePlayerP() {
+        int a = selectedPlayer.getNDerrotas();
+        a++;
+        selectedPlayer.setNDerrotas(a);
+    }
+    
+    public void updatePlayerE() {
+        int a = selectedPlayer.getNEmpates();
+        a++;
+        selectedPlayer.setNEmpates(a);
+    }
+    
+    public List<Usuario> getListUsuarios() {
+        return listUsuarios;
+    }
+
+    public List<Usuario> getUsers() {
+        List<Usuario> list = u.listaUsuarios();
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list;
+        }
+    }
+
+    public void addListUsers() {
+        List<Usuario> list = getUsers();
+        for (Usuario string : list) {
+            listUsuarios.add(string);
+        }
+    }
+
+}
+
+
+/*
   public PlayerBean.Player playGame(Game game){
       for(int i=0; i<game.rules.size();i++){
           if(game.rules.get(i).nameG.equals(game.mp1.name)&&game.rules.get(i).nameP.equals(game.mp2.name)){
@@ -259,4 +319,3 @@ public void JoinGame(String nombre, int id) {
       }
       return null;
   }*/
-}
