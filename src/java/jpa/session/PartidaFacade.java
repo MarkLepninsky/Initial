@@ -37,10 +37,6 @@ public class PartidaFacade extends AbstractFacade<Partida> {
     em.createNativeQuery("INSERT INTO partida values(?,0,0,1,0,0,0,?,-1,?,-1)").setParameter(1,id).setParameter(2,u1).setParameter(3,mov1).executeUpdate();
     }
     
-    public void crearPartidaTorneo(int id, int u1, int u2){
-    em.createNativeQuery("INSERT INTO partida values(?,0,0,1,0,0,0,?, ?,-1,-1)").setParameter(1,id).setParameter(2,u1).setParameter(3,u2).executeUpdate();
-    } 
-    
     public void eliminarPartida(int id){
     em.createNativeQuery("DELETE FROM Partida WHERE idPartida = ?").setParameter(1,id).executeUpdate();
     }
