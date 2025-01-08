@@ -70,12 +70,12 @@
     <body>
         <div class="content-container">
             <h:form>
-                <h1>Seleccionar Jugador:</h1>
+                <h1>Seleccionar Partida:</h1>
                 <h:selectOneMenu value="#{game.idPartida}">
                     <f:selectItems value="#{game.listGames}" var="u" itemLabel="#{u.idPartida}" itemValue="#{u.idPartida}" />
                     <f:ajax render="Partida" listener="#{game.onPartidaChange}" />
                 </h:selectOneMenu>
-                <h:commandButton value="Seleccionar" action="#{game.updatePartida(game.selectedPartida.idU2,game.selectedPartida.idMovimiento2)}" class="btn" />
+                
                 <br/>
 
                 
