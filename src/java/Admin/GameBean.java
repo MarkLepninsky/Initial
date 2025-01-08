@@ -223,7 +223,9 @@ public class GameBean implements Serializable {
         }
     }
 
-    public void updatePartida(int u2, int mov2) {
+    public void updatePartida(String us2, String movs2) {
+        int u2 = uf.getId(us2);
+        int mov2 = m.findMovimiento(movs2);
         int u1 = selectedPartida.getIdU1();
         int mov1 = selectedPartida.getIdMovimiento1();
         int id = selectedPartida.getIdPartida();
