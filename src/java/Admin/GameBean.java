@@ -245,7 +245,7 @@ public class GameBean implements Serializable {
             int a = regla.getMovimientoidMovimiento().getIdMovimiento();
             int b = regla.getMovimientoidMovimiento1().getIdMovimiento();
             if (a == mov1 && b == mov2) {
-                result = "Has ganado"; 
+                result = "Has Perdido"; 
                 onPlayerChange(u1);
                 updatePlayerG();
                 onPlayerChange(u2);
@@ -253,7 +253,7 @@ public class GameBean implements Serializable {
                 p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
                 init();
             } else if (a == mov2 && b == mov1) {
-                result = "Has perdido"; 
+                result = "Has Ganado"; 
                 onPlayerChange(u2);
                 updatePlayerG();
                 onPlayerChange(u1);
