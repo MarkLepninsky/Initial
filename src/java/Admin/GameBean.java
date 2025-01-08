@@ -30,7 +30,7 @@ public class GameBean implements Serializable {
     @EJB
     private MovimientoFacade m;
     @EJB
-    private UsuarioFacade u;
+    private UsuarioFacade uf;
     @EJB
     private ReglasFacade rf;
 
@@ -187,7 +187,7 @@ public class GameBean implements Serializable {
     public void createGame() {
         int a = p.getMaxid();
         int movId = m.findMovimiento(tempMov);
-        int b = u.getId(tempName);
+        int b = uf.getId(tempName);
         p.crearPartida(a + 1, b, movId);
         init();
     }
@@ -195,14 +195,14 @@ public class GameBean implements Serializable {
     public void createGame(String nombre) {
         int a = p.getMaxid();
         int movId = m.findMovimiento(nombre);
-        int b = u.getId(tempName);
+        int b = uf.getId(tempName);
         p.crearPartida(a + 1, b, movId);
         init();
     }
 
     public void onGameChange() {
 
-        int a = u.getId(tempName);
+        int a = uf.getId(tempName);
         int b = m.findMovimiento(tempMov);
         for (Partida p : listGames) {
             if (p.getIdPartida().equals(idPartida) || p.getIdPartida() == idPartida) {
@@ -271,19 +271,40 @@ public class GameBean implements Serializable {
 
     public void updatePlayerG() {
         int a = selectedPlayer.getNVictorias();
+        int b = selectedPlayer.getNDerrotas();
+        int c = selectedPlayer.getNEmpates();
+        int d = selectedPlayer.getRanking();
+        String pass = selectedPlayer.getPassword();
+        String name = selectedPlayer.getNombre();
+        int e = selectedPlayer.getIdUsuario();
         a++;
-        selectedPlayer.setNVictorias(a);
+        uf.removeAccount(e);
+        uf.createAccount2(name,pass,e,a,b,c,d);
     }
     public void updatePlayerP() {
-        int a = selectedPlayer.getNDerrotas();
-        a++;
-        selectedPlayer.setNDerrotas(a);
+        int a = selectedPlayer.getNVictorias();
+        int b = selectedPlayer.getNDerrotas();
+        int c = selectedPlayer.getNEmpates();
+        int d = selectedPlayer.getRanking();
+        String pass = selectedPlayer.getPassword();
+        String name = selectedPlayer.getNombre();
+        int e = selectedPlayer.getIdUsuario();
+        b++;
+        uf.removeAccount(e);
+        uf.createAccount2(name,pass,e,a,b,c,d);
     }
     
     public void updatePlayerE() {
-        int a = selectedPlayer.getNEmpates();
-        a++;
-        selectedPlayer.setNEmpates(a);
+        int a = selectedPlayer.getNVictorias();
+        int b = selectedPlayer.getNDerrotas();
+        int c = selectedPlayer.getNEmpates();
+        int d = selectedPlayer.getRanking();
+        String pass = selectedPlayer.getPassword();
+        String name = selectedPlayer.getNombre();
+        int e = selectedPlayer.getIdUsuario();
+        c++;
+        uf.removeAccount(e);
+        uf.createAccount2(name,pass,e,a,b,c,d);
     }
     
     public List<Usuario> getListUsuarios() {
@@ -291,7 +312,7 @@ public class GameBean implements Serializable {
     }
 
     public List<Usuario> getUsers() {
-        List<Usuario> list = u.listaUsuarios();
+        List<Usuario> list = uf.listaUsuarios();
         if (list.isEmpty()) {
             return null;
         } else {

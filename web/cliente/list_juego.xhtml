@@ -88,11 +88,11 @@
                 <h:commandButton value="Jugar" action="#{game.updatePartida(game.tempName, game.tempMov)}" class="btn" />
                 <br/>
 
-                <h:commandButton value="AdminPage" action="#{NavBean.goToAdmin}" class="btn" />
+                 <h:commandButton value="ClientPage" action="#{NavBean.gotoCliente}" class="btn" />
                 <br/>
                 <h:commandButton value="Logout" action="#{NavBean.goToLogout}" class="btn" />
 
-                <h:outputText value="Se ha modificado el jugador: #{player.tempName}" />
+               
             </h:form>
         </div>
     </body>

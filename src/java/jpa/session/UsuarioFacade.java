@@ -35,6 +35,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         em.createNativeQuery("INSERT INTO usuario (idUsuario, Nombre, Password,N_Victorias , N_Derrotas, N_Empates, Ranking) VALUES (?, ?, ?, 0, 0, 0, 0)").setParameter(1, id).setParameter(2, nombre).setParameter(3, password).executeUpdate();
     }
     
+   public void createAccount2(String nombre, String password, int id, int v, int d, int e, int r){
+        em.createNativeQuery("INSERT INTO usuario (idUsuario, Nombre, Password,N_Victorias , N_Derrotas, N_Empates, Ranking) VALUES (?, ?, ?, ?, ?, ?, ?)").setParameter(1, id).setParameter(2, nombre).setParameter(3, password).setParameter(4,v).setParameter(5, d).setParameter(6,e).setParameter(7,r).executeUpdate();
+    } 
+    
     public String findName(String nombre){
     List<String> list = em.createNativeQuery("SELECT Nombre FROM usuario WHERE Nombre = ?").setParameter(1,nombre).getResultList();
     if(list.isEmpty()){
