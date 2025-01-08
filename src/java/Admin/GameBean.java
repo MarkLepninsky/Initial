@@ -179,8 +179,10 @@ public class GameBean implements Serializable {
         List<Partida> list = getPartidas();
         numPartidas = 0;
         for (Partida string : list) {
-            listGames.add(string);
-            numPartidas++;
+            if (string.getIdMovimiento2() == -1) {
+                listGames.add(string);
+                numPartidas++;
+            }
         }
     }
 
@@ -242,7 +244,7 @@ public class GameBean implements Serializable {
                 onPlayerChange(u1);
                 updatePlayerP();
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
-            } else if (mov1 == mov2){
+            } else if (mov1 == mov2) {
                 onPlayerChange(u1);
                 updatePlayerE();
                 onPlayerChange(u2);
@@ -279,8 +281,9 @@ public class GameBean implements Serializable {
         int e = selectedPlayer.getIdUsuario();
         a++;
         uf.removeAccount(e);
-        uf.createAccount2(name,pass,e,a,b,c,d);
+        uf.createAccount2(name, pass, e, a, b, c, d);
     }
+
     public void updatePlayerP() {
         int a = selectedPlayer.getNVictorias();
         int b = selectedPlayer.getNDerrotas();
@@ -291,9 +294,9 @@ public class GameBean implements Serializable {
         int e = selectedPlayer.getIdUsuario();
         b++;
         uf.removeAccount(e);
-        uf.createAccount2(name,pass,e,a,b,c,d);
+        uf.createAccount2(name, pass, e, a, b, c, d);
     }
-    
+
     public void updatePlayerE() {
         int a = selectedPlayer.getNVictorias();
         int b = selectedPlayer.getNDerrotas();
@@ -304,9 +307,9 @@ public class GameBean implements Serializable {
         int e = selectedPlayer.getIdUsuario();
         c++;
         uf.removeAccount(e);
-        uf.createAccount2(name,pass,e,a,b,c,d);
+        uf.createAccount2(name, pass, e, a, b, c, d);
     }
-    
+
     public List<Usuario> getListUsuarios() {
         return listUsuarios;
     }
@@ -326,7 +329,6 @@ public class GameBean implements Serializable {
             listUsuarios.add(string);
         }
     }
-
 }
 
 
