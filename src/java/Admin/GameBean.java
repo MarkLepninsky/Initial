@@ -240,20 +240,22 @@ public class GameBean implements Serializable {
                 onPlayerChange(u2);
                 updatePlayerP();
                 p.unirPartida(id, u1, mov1, u2, mov2, 1, 0);
+                init();
             } else if (a == mov2 && b == mov1) {
                 onPlayerChange(u2);
                 updatePlayerG();
                 onPlayerChange(u1);
                 updatePlayerP();
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 1);
+                init();
             } else if (mov1 == mov2) {
                 onPlayerChange(u1);
                 updatePlayerE();
                 onPlayerChange(u2);
                 updatePlayerE();
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 0);
+                init();
             }
-            init();
         }
     }
 

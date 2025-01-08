@@ -75,7 +75,7 @@
                     <f:selectItems value="#{game.listGames}" var="u" itemLabel="#{u.idPartida}" itemValue="#{u.idPartida}" />
                     <f:ajax render="Partida" listener="#{game.onPartidaChange}" />
                 </h:selectOneMenu>
-                <h:commandButton value="Seleccionar" action="#{game.updatePartida(game.selectedPartida.idU2,game.selectedPartida.idMovimiento2)}" class="btn" />
+                <h:commandButton value="Eliminar" action="#{game.updatePartida(game.selectedPartida.idU2,game.selectedPartida.idMovimiento2)}" class="btn" />
                 <br/>
 
                 
