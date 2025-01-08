@@ -253,6 +253,7 @@ public class GameBean implements Serializable {
                 updatePlayerE();
                 p.unirPartida(id, u1, mov1, u2, mov2, 0, 0);
             }
+            init();
         }
     }
 
